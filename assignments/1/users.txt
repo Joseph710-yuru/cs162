@@ -1,0 +1,6 @@
+//********** format
+<number of users in file>
+<user name> <user ID#> <user password>
+<user name> <user ID#> <user password>
+<user name> <user ID#> <user password>
+*************//
