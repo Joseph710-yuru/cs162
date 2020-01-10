@@ -6,29 +6,32 @@
 ** Input:
 ** Output:
 ******************************************************/
+#include "header1.h"
 
-struct user{
-   string name;
-   int id;
-   string password;
+int main(){
+  user *loser = new user;
+
+  delete loser;
+  return 0;
 }
 
-struct budget{
-   int id;
-   float balance;
-   int num_transactions;
-   struct transaction *t;
+bool get_login(user *newuser){
+  int fail=0, repeat=0, uvalid=0, pvalid=0;
+  if (fail < 3){
+
+  } else if (fail >= 3){
+    cout << "Too many failed attempts to log in";
+    return false;
+  }
 }
 
-struct transaction{
-   float amount;
-   string date;
-   string category;
-   string description;
+void get_username(user *newuser){
+  cout << "User ID: ";
+  cin << (*newuser).user;
+
 }
 
-budget* create_budgets(int);
-void get_budget_data(budget*, int, ifstream &);
-transaction* create_transactions(int);
-void get_transaction_data(transaction*, int, ifstream &);
-void delete_info(user**, int, budget**, int);
+void get_password(user *newuser){
+
+
+}

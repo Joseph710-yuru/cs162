@@ -1,0 +1,15 @@
+//****************************
+<number of budgets in file>
+<budget ID#> <budget balance> <number of transactions>
+<date of transaction> <transaction amount> <transaction description> <transaction category>
+<date of transaction> <transaction amount> <transaction description> <transaction category>
+<date of transaction> <transaction amount> <transaction description> <transaction category>
+...
+<second budget ID#> <budget balance> <number of transactions>
+<date of transaction> <transaction amount> <transaction description> <transaction category>
+<date of transaction> <transaction amount> <transaction description> <transaction category>
+...
+<third budget ID#> <budget balance> <number of transactions>
+<date of transaction> <transaction amount> <transaction description> <transaction category>
+...
+***************************//
