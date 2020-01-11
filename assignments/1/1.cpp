@@ -7,27 +7,25 @@
 ** Output:
 ******************************************************/
 #include "header1.h"
+#include <fstream>
+using namespace std;
 
 int main(){
   user *loser = new user;
+  if (get_login(loser)==false) return 0;
+  else {
+    cout << "User: " << loser.name << endl;
+    cout << "User ID: " << loser.id << endl;
 
+
+}
   delete loser;
   return 0;
 }
 
-bool get_login(user *newuser){
-  int fail=0, repeat=0, uvalid=0, pvalid=0;
-  if (fail < 3){
-
-  } else if (fail >= 3){
-    cout << "Too many failed attempts to log in";
-    return false;
-  }
-}
-
-void get_username(user *newuser){
+void get_userid(user *newuser){
   cout << "User ID: ";
-  cin << (*newuser).user;
+  cin << (*newuser).id;
 
 }
 

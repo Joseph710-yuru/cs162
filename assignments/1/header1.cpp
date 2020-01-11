@@ -6,8 +6,13 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 bool get_login(user *newuser){
+  int fail=0, repeat=0, uvalid=0, pvalid=0;
+  if (fail < 3){
 
-
+  } else if (fail >= 3){
+    cout << "Too many failed attempts to log in";
+    return false;
+  }
 }
 /*******************************************************************
 Function:
