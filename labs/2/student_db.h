@@ -5,6 +5,7 @@
 /******** Dependencies **********/
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 /******* Structs ********/
@@ -16,7 +17,8 @@ struct student {
 
 /******* Declarations **********/
 student* create_student_db(int);
-void get_student_db_info(student *, int, fstream &);
+void get_student_db_info(student *, int, ifstream &);
 void delete_student_db_info(student **, int);
+void sortwrite_student_db(student *, int);
 
 #endif
