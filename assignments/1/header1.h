@@ -1,6 +1,11 @@
 #ifndef HEADER1_H
 #define HEADER1_H
 
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 struct user{
    string name;
    int id;
@@ -21,7 +26,8 @@ struct budget{
    struct transaction *t;
 };
 
-bool get_login(user *newuser);
+bool compare_user(user *user1, user *user2, int num);
+bool check_login(user *newuser);
 budget* create_budgets(int);
 void get_budget_data(budget*, int, ifstream &);
 transaction* create_transactions(int);

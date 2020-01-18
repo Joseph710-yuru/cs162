@@ -78,7 +78,7 @@ void sortwrite_student_db(student *studentdb, int num){
   for (int x = 0; x < num; x++){
     temp = studentdb[x].name;
     o << "Name: " << temp << "\n";
-    o << studentdb[x].major;
+    o << "Major: " << studentdb[x].major;
     o << "\n\n";
   }
   o.close();

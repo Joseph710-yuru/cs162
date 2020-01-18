@@ -1,3 +1,9 @@
+#include <iostream>
+#include <string>
+#include "header1.h"
+
+using namespace std;
+
 /*******************************************************************
 Function:
 Description:
@@ -5,6 +11,7 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
+/*
 bool get_login(user *newuser){
   int fail=0, repeat=0, uvalid=0, pvalid=0;
   if (fail < 3){
@@ -14,6 +21,7 @@ bool get_login(user *newuser){
     return false;
   }
 }
+*/
 /*******************************************************************
 Function:
 Description:
