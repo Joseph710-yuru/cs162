@@ -1,0 +1,21 @@
+Name: OliviaDunham
+Criminal_Justice
+
+Name: JoshLyman
+Law
+
+Name: C.J.Cregg
+Political_Science
+
+Name: WalterBishop
+General_Sciences
+
+Name: SamSeaborn
+Law
+
+Name: LeslieKnope
+Public_and_Environmental_Affairs
+
+Name: TobyZiegler
+Communications
+

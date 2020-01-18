@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -62,6 +63,32 @@ void delete_student_db_info(student **student_record, int num){
 
 
 void sortwrite_student_db(student *studentdb, int num){
+  string temp;
+  ofstream o;
+  o.open("output.txt");
 
+    for (int i = 0; i < num-1; i++){
+      for (int j = 0; j < num-i-1; j++){
+        if (studentdb -> name[j] > studentdb -> name[j+1]){
+          swap(studentdb[j], studentdb[j+1]);
+        }
+      }
+    }
 
+  for (int x = 0; x < num; x++){
+    temp = studentdb[x].name;
+    o << "Name: " << temp << "\n";
+    o << studentdb[x].major;
+    o << "\n\n";
+  }
+  o.close();
 }
+
+/*
+void swap(string *xp, string *yp)
+{
+    string temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+*/

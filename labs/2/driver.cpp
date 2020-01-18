@@ -41,7 +41,7 @@ int main() {
   fin.close();
 
 // sort and write to doc
-  
+  sortwrite_student_db(studentdb, num_of_students);
 
   //delete_student_db_info(&studentdb, num_of_students);
   delete [] studentdb;
