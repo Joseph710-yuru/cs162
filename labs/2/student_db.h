@@ -11,7 +11,8 @@ using namespace std;
 /******* Structs ********/
 struct student {
   int id;
-  string name;
+  string first_name;
+  string last_name;
   string major;
 };
 

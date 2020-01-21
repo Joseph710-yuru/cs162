@@ -33,10 +33,10 @@ void get_student_db_info(student *student_record, int num, ifstream &fin){
       cout << student_record[i].id << endl;
 
       getline(fin, temp_string, ' ');
-      student_record[i].name += temp_string;
+      student_record[i].first_name = temp_string;
       getline(fin, temp_string, ' ');
-      student_record[i].name += temp_string;
-      cout << student_record[i].name << endl;
+      student_record[i].last_name = temp_string;
+      cout << student_record[i].first_name << " " << student_record[i].last_name << endl;
 
       getline(fin, temp_string, '\n');
       student_record[i].major = temp_string;
@@ -69,18 +69,30 @@ void sortwrite_student_db(student *studentdb, int num){
 
     for (int i = 0; i < num-1; i++){
       for (int j = 0; j < num-i-1; j++){
-        if (studentdb -> name[j] > studentdb -> name[j+1]){
+        if (studentdb[j].last_name.at(0) > studentdb[j+1].last_name.at(0)){
           swap(studentdb[j], studentdb[j+1]);
         }
       }
     }
+o << "sorted by last name:\n";
+    for (int x = 0; x < num; x++){
+      o << studentdb[x].id << " " << studentdb[x].first_name << " " << studentdb[x].last_name << " " << studentdb[x].major;
+      o << "\n";
+    }
 
-  for (int x = 0; x < num; x++){
-    temp = studentdb[x].name;
-    o << "Name: " << temp << "\n";
-    o << "Major: " << studentdb[x].major;
-    o << "\n\n";
+  for (int i = 0; i < num-1; i++){
+    for (int j=0; j < num-i-1;j++){
+      if (studentdb[j].id > studentdb[j+1].id){
+        swap(studentdb[j], studentdb[j+1]);
+      }
+    }
   }
+o << "sorted by id:\n";
+  for (int x = 0; x < num; x++){
+    o << studentdb[x].id << " " << studentdb[x].first_name << " " << studentdb[x].last_name << " " << studentdb[x].major;
+    o << "\n";
+  }
+
   o.close();
 }
 
