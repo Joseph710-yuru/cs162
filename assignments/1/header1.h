@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -26,8 +27,18 @@ struct budget{
    struct transaction *t;
 };
 
-bool compare_user(user *user1, user *user2, int num);
-bool check_login(user *newuser);
+int get_budget_index(budget *, user *, int);
+bool check_range(int, int, int);
+bool is_int(int);
+void get_int(int &);
+void get_int_range(int &, int, int);
+void select_option(int, int &);
+void print_options();
+void get_user_data(user*, int, ifstream&);
+void get_password(user *);
+void get_userid(user *);
+bool compare_user(user *, user *, int);
+bool check_login(user *, int &);
 budget* create_budgets(int);
 void get_budget_data(budget*, int, ifstream &);
 transaction* create_transactions(int);
