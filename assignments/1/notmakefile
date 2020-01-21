@@ -1,4 +1,0 @@
-CC = g++
-exe_file = assignment1
-$(exe_file): assignment1.cpp header1.cpp
-	$(CC) assignment1.cpp header1.cpp -o $(exe_file)
