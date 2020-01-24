@@ -1,0 +1,45 @@
+Date: 12/24/2019
+Amount: $1015
+Description: Flute
+Category: Entertainment
+
+Date: 01/01/2020
+Amount: $12.99
+Description: Champagne
+Category: Food
+
+Date: 12/28/2019
+Amount: $5288
+Description: Rent
+Category: Housing
+
+Date: 12/24/2019
+Amount: $1015
+Description: Flute
+Category: Entertainment
+
+Date: 12/28/2019
+Amount: $5288
+Description: Rent
+Category: Housing
+
+Date: 01/01/2020
+Amount: $12.99
+Description: Champagne
+Category: Food
+
+Date: 01/01/2020
+Amount: $12.99
+Description: Champagne
+Category: Food
+
+Date: 12/24/2019
+Amount: $1015
+Description: Flute
+Category: Entertainment
+
+Date: 12/28/2019
+Amount: $5288
+Description: Rent
+Category: Housing
+
