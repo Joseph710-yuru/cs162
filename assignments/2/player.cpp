@@ -1,8 +1,4 @@
-class Player {
-  private:
-    Hand hand;
-    string name;
-  public:
-  // must have constructors, destructor, accessor methods, and mutator methods
+#include <iostream>
+#include "player.h"
 
-};
+using namespace std;

@@ -1,12 +1,17 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
-#include "hand.h"
+#include "deck.h"
+#include "player.h"
 
 using namespace std;
 
-class Hand {
+class Game {
   private:
-    Card* cards;
-    int n_cards;  // Number of cards in the hand.
+    Deck cards;
+    Player players[2];
   public:
   // must have constructors, destructor, accessor methods, and mutator methods
 };
+#endif

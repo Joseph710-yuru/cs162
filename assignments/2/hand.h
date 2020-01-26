@@ -1,7 +1,8 @@
-#include <iostream>
-#include "hand.h"
+#ifndef HAND_H
+#define HAND_H
 
-using namespace std;
+#include <iostream>
+#include "card.h"
 
 class Hand {
   private:
@@ -10,3 +11,5 @@ class Hand {
   public:
   // must have constructors, destructor, accessor methods, and mutator methods
 };
+
+#endif
