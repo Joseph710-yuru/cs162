@@ -7,11 +7,17 @@
 
 using namespace std;
 
-class Game {
+class game {
   private:
-    Deck cards;
-    Player players[2];
+    deck cards;
+    player players[2];
   public:
-  // must have constructors, destructor, accessor methods, and mutator methods
+    // must have constructors, destructor, accessor methods, and mutator methods
+    game();
+    ~game();
+    deck get_cards();
+    player get_players();
+    deck set_cards();
+    player set_players();
 };
 #endif

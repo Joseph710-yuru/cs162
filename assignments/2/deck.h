@@ -12,7 +12,12 @@ class deck {
     int n_cards;  // Number of cards remaining in the deck.
   public:
     deck(int);
-    void creat_deck(int);
+    ~deck();
+    card get_cards();
+    void set_cards();
+    int get_n_cards();
+    void set_n_cards(int);
+    void create_deck(int);
     void shuffle_deck(int);
     void print_deck(int);
 };

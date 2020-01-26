@@ -2,11 +2,63 @@
 #include "hand.h"
 
 using namespace std;
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+hand::hand(){
 
-class Hand {
-  private:
-    Card* cards;
-    int n_cards;  // Number of cards in the hand.
-  public:
-  // must have constructors, destructor, accessor methods, and mutator methods
-};
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+hand::~hand(){
+
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+card* hand::get_cards(){
+
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+card* hand::set_cards(int){
+
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+int hand::get_n_cards(){
+
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+int hand::set_n_cards(){
+
+}

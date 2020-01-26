@@ -4,12 +4,18 @@
 #include <iostream>
 #include "card.h"
 
-class Hand {
+class hand {
   private:
-    Card* cards;
+    card* cards;
     int n_cards;  // Number of cards in the hand.
   public:
-  // must have constructors, destructor, accessor methods, and mutator methods
+    // must have constructors, destructor, accessor methods, and mutator methods
+    hand();
+    ~hand();
+    card* get_cards();
+    card* set_cards(int);
+    int get_n_cards();
+    int set_n_cards();
 };
 
 #endif
