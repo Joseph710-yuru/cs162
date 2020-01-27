@@ -9,7 +9,7 @@ using namespace std;
 
 class player {
   private:
-    hand hand;
+    hand h;
     string name;
   public:
     // must have constructors, destructor, accessor methods, and mutator methods

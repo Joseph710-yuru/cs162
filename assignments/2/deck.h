@@ -11,10 +11,10 @@ class deck {
     card cards[52];
     int n_cards;  // Number of cards remaining in the deck.
   public:
-    deck(int);
+    deck();
     ~deck();
     card get_cards();
-    void set_cards();
+    void set_cards(int, int, int);
     int get_n_cards();
     void set_n_cards(int);
     void create_deck(int);

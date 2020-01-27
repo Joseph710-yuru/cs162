@@ -16,4 +16,8 @@ class card {
     int get_suit();
     void set_rank(int);
     void set_suit(int);
+    string name_suit();
+    string name_rank();
 };
+
+#endif
