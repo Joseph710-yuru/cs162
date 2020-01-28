@@ -8,10 +8,9 @@ int main(){
   deck newd(52);
   //newd.create_deck(52);
   //newd.print_deck(52);
-  cout << "create deck: \n";
+  cout << "creating deck... \n";
   newd.create_deck(52);
-  newd.print_deck(52);
-  cout << "shuffle deck: \n";
+  cout << "shuffling deck... \n";
   newd.shuffle_deck(52);
   newd.print_deck(52);
   return 0;
