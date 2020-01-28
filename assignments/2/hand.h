@@ -11,6 +11,7 @@ class hand {
   public:
     // must have constructors, destructor, accessor methods, and mutator methods
     hand();
+    hand(const hand&);
     ~hand();
     card* get_cards();
     card* set_cards(int);
