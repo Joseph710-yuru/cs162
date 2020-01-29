@@ -33,7 +33,6 @@ void deck::shuffle_deck(int num){
     r = i + (rand() % (52-i));
     swap_cards(deckofcards[i], deckofcards[r]);
   }
-
 }
 
 void deck::print_deck(int num){

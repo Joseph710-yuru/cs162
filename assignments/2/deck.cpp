@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "deck.h"
 #include "card.h"
 
@@ -24,7 +26,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 deck::~deck(){
-
+ cout << "deck destructor called\n";
 }
 /*******************************************************************
 Function: create_deck()
@@ -35,13 +37,12 @@ Pre-Conditions:
 Post-Conditions: Each card in the deck has a rank and suit not -1
 ********************************************************************/
 void deck::create_deck(int num) {
-  int i = 0, j = 0;
-  while (i+j <= num){
-    for (i=0; j < 4; j++){
-      for (j; j < 13; j++){
-        cards[i+j].set_rank(j);
-      }
-      cards[i+j].set_suit(i);
+  int index=0;
+  for (int i=0; i < 4; i++){
+    for (int j=0; j<13; j++){
+      cards[index].set_suit(i+1); //1-4
+      cards[index].set_rank(j+1); // 1-13
+      index++;
     }
   }
 }
@@ -53,7 +54,12 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 void deck::shuffle_deck(int num){
-
+  srand(time(0));
+  int r;
+  for (int i=0; i < num; i++){
+    r = i + (rand() % (52-i));
+    swap_cards(cards[i], cards[r]);
+  }
 }
 /*******************************************************************
 Function: print_deck()
@@ -64,7 +70,7 @@ Post-Conditions: prints every card in the deck's rank and suit to terminal
 ********************************************************************/
 void deck::print_deck(int num){
   for (int i=0;i<num;i++){
-    cout << "rank " << cards[i].name_rank() << " suit: ";
+    cout << "rank: " << cards[i].name_rank() << " suit: ";
     cout << cards[i].name_suit() << endl;
   }
 }
@@ -108,4 +114,17 @@ Post-Conditions: assigns n_cards to the value of the int parameter
 ********************************************************************/
 void deck::set_n_cards(int num){
   n_cards = num;
+}
+/*******************************************************************
+Function: swap_cards()
+Description: Swaps the location of a card in an array with another
+Parameters: card &, card &
+Pre-Conditions:
+Post-Conditions: car a has the inital value of b and vice versa
+********************************************************************/
+void swap_cards(card &a, card &b){
+  card temp_card;
+  temp_card = a;
+  a = b;
+  b = temp_card;
 }

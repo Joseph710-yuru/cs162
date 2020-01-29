@@ -2,8 +2,8 @@
 #define PLAYER_H
 
 #include <iostream>
-#include "hand.h"
 #include <string>
+#include "hand.h"
 
 using namespace std;
 

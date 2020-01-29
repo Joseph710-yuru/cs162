@@ -4,6 +4,8 @@
 #include <iostream>
 #include "card.h"
 
+using namespace std;
+
 class hand {
   private:
     card* cards;
@@ -13,6 +15,7 @@ class hand {
     hand();
     hand(const hand&);
     ~hand();
+    const hand& operator=(const hand &);
     card* get_cards();
     card* set_cards(int);
     int get_n_cards();
