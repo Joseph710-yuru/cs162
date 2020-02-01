@@ -14,4 +14,6 @@ class deck {
     void print_deck(int);
 };
 
+void swap_cards(card &, card &);
+
 #endif

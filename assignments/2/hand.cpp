@@ -10,7 +10,38 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 hand::hand(){
-
+ n_cards = 7;
+ cards = new card[n_cards];
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+hand::hand(const hand &hand1){
+  this->n_cards = hand1.n_cards;
+  this->cards = new card[this->n_cards];
+  for (int i=0;i < this->n_cards;i++){
+    this->cards[i] = hand1.cards[i];
+  }
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+const hand& hand::operator=(const hand& hand1){
+  delete [] this->cards;
+  this->n_cards = hand1.n_cards;
+  this->cards = new card[this->n_cards];
+  for (int i=0;i < this->n_cards;i++){
+    this->cards[i] = hand1.cards[i];
+  }
+  return *this;
 }
 /*******************************************************************
 Function:
@@ -20,7 +51,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 hand::~hand(){
-
+  delete [] cards;
 }
 /*******************************************************************
 Function:

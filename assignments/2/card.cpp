@@ -21,7 +21,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 card::~card(){
-
+  cout << "destructor for card called\n";
 }
 /*******************************************************************
 Function: get_rank()
