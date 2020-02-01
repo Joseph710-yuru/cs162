@@ -52,7 +52,7 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void deck::shuffle_deck(int num){
+void deck::shuffle_deck(){
 
 }
 /*******************************************************************

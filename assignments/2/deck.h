@@ -18,7 +18,7 @@ class deck {
     int get_n_cards();
     void set_n_cards(int);
     void create_deck(int);
-    void shuffle_deck(int);
+    void shuffle_deck();
     void print_deck(int);
 };
 
