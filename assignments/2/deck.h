@@ -13,13 +13,14 @@ class deck {
   public:
     deck();
     ~deck();
-    card get_cards();
+    card get_cards(int);
     void set_cards(int, int, int);
     int get_n_cards();
     void set_n_cards(int);
     void create_deck(int);
     void shuffle_deck();
     void print_deck(int);
+    void clean();
 };
 
 void swap_cards(card &, card &);

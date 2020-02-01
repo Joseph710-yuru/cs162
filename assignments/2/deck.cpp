@@ -57,7 +57,7 @@ Post-Conditions:
 void deck::shuffle_deck(){
   srand(time(0));
   int r;
-  for (int i=0; i < num; i++){
+  for (int i=0; i < 52; i++){
     r = i + (rand() % (52-i));
     swap_cards(cards[i], cards[r]);
   }
@@ -82,8 +82,8 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-card deck::get_cards() {
-
+card deck::get_cards(int i) {
+  return cards[i];
 }
 /*******************************************************************
 Function:
@@ -128,4 +128,18 @@ void swap_cards(card &a, card &b){
   temp_card = a;
   a = b;
   b = temp_card;
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+void deck::clean(){
+  for (int i=0; i < n_cards; i++){
+    if (cards[i].get_rank() == -1){
+      swap_cards(cards[i], cards[i+1]);
+    }
+  }
 }

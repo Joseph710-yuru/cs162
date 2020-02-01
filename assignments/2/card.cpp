@@ -21,7 +21,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 card::~card(){
-  cout << "destructor for card called\n";
+
 }
 /*******************************************************************
 Function: get_rank()
@@ -107,5 +107,7 @@ string card::name_rank(){
     return "Queen";
   } else if (rank == 12){
     return "King";
+  } else if (rank < 10 && rank > 0) {
+    return to_string(rank + 1);
   }
 }

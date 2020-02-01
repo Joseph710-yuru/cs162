@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "card.h"
+#include "deck.h"
 
 using namespace std;
 
@@ -16,10 +17,14 @@ class hand {
     hand(const hand&);
     ~hand();
     const hand& operator=(const hand &);
-    card* get_cards();
-    card* set_cards(int);
+    card* get_cards(int);
+    card* set_cards(deck &);
     int get_n_cards();
     int set_n_cards();
+    void clean();
+    void print_hand();
+    int num_draw();
+    void draw_cards(int, deck &);
 };
 
 #endif
