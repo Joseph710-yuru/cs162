@@ -60,7 +60,7 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-card* hand::get_cards(int){
+card* hand::get_cards(int i){
  return cards;
 }
 /*******************************************************************

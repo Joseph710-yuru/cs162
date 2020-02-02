@@ -15,10 +15,11 @@ class player {
     // must have constructors, destructor, accessor methods, and mutator methods
     player();
     ~player();
-    hand get_hand();
-    string get_name();
+    const hand get_hand();
+    const string get_name();
     void set_hand();
-    void set_name(string n);
+    void set_name(string);
+    void play_game();
 };
 
 #endif

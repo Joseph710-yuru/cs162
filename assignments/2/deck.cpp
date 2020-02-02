@@ -158,9 +158,8 @@ Parameters: n/a
 Pre-Conditions: ya call the dang ol' thing
 Post-Conditions: true if there is a card left to draw, otherwise false
 ********************************************************************/
-void deck::can_draw() {
-  card temp = cards.get_cards(0);
-  if (temp.get_rank == -1) {
+bool deck::can_draw() {
+  if (cards[0].get_rank() == -1) {
     return false;
   } else {
     return true;

@@ -10,15 +10,19 @@ using namespace std;
 class game {
   private:
     deck cards;
+    deck pile;
     player players[2];
   public:
     // must have constructors, destructor, accessor methods, and mutator methods
     game();
     ~game();
-    deck get_cards();
-    player get_players();
+    const deck get_cards();
+    player get_players(int);
     deck set_cards();
     player set_players();
     bool check_win();
 };
+
+string get_string();
+
 #endif

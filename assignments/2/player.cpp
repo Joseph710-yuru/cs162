@@ -11,7 +11,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 player::player(){
-  name = "undefined";
+  name = "Computer";
 }
 /*******************************************************************
 Function:
@@ -30,7 +30,7 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-hand player::get_hand(){
+const hand player::get_hand(){
   return h;
 }
 /*******************************************************************
@@ -40,7 +40,7 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-string player::get_name(){
+const string player::get_name(){
   return name;
 }
 /*******************************************************************
@@ -50,15 +50,15 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void player::set_hand_n(int n){
-  
+void player::set_hand(){
+
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: set_name()
+Description: mutator for name member variable
+Parameters: string n
+Pre-Conditions: accepts string as parameter
+Post-Conditions: value of name is changed to the value of n
 ********************************************************************/
 void player::set_name(string n){
   name = n;
