@@ -20,7 +20,7 @@ class hand {
     card* get_cards(int);
     card* set_cards(deck &);
     int get_n_cards();
-    int set_n_cards();
+    void set_n_cards(int);
     void clean();
     void print_hand();
     int num_draw();

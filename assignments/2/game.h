@@ -19,5 +19,6 @@ class game {
     player get_players();
     deck set_cards();
     player set_players();
+    bool check_win();
 };
 #endif

@@ -11,7 +11,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 player::player(){
-
+  name = "undefined";
 }
 /*******************************************************************
 Function:
@@ -41,7 +41,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 string player::get_name(){
-
+  return name;
 }
 /*******************************************************************
 Function:
@@ -50,8 +50,8 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void player::set_hand(){
-
+void player::set_hand_n(int n){
+  
 }
 /*******************************************************************
 Function:
@@ -60,6 +60,6 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void player::set_name(){
-
+void player::set_name(string n){
+  name = n;
 }

@@ -18,7 +18,7 @@ class player {
     hand get_hand();
     string get_name();
     void set_hand();
-    void set_name();
+    void set_name(string n);
 };
 
 #endif

@@ -80,24 +80,24 @@ card* hand::set_cards(deck &a){
   }
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: get_n_cards()
+Description: accessor for n_cards
+Parameters: n/a
+Pre-Conditions: gets called
+Post-Conditions: returns value of n_cards()
 ********************************************************************/
 int hand::get_n_cards(){
-
+  return n_cards;
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: set_n_cards()
+Description: changes the value of n_cards
+Parameters: int n
+Pre-Conditions: accepts int as parameter
+Post-Conditions: n_cards changes to the value of n
 ********************************************************************/
-int hand::set_n_cards(){
-
+void hand::set_n_cards(int n){
+  n_cards = n;
 }
 /*******************************************************************
 Function: print_hand()
@@ -154,9 +154,9 @@ Parameters: deck &
 Pre-Conditions: accepts a deck as a parameter
 Post-Conditions:
 ********************************************************************/
-void draw_cards(int num, deck &deck){
+void hand::draw_cards(int num, deck &deck){
   for (int i=0; i < num; i++){
-    cards[n_cards+i] = deck.get_cards(i);
+    cards[n_cards + i] = deck.get_cards(i);
     deck.set_cards(i, -1, -1);
     deck.clean();
   }
