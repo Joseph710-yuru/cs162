@@ -10,7 +10,7 @@ int main() {
   player a;
   deck b;
 
-  a.set_name("Garrett");
+  a.set_name(get_string());
   cout << a.get_name() << endl;
 
   b.create_deck(52);
@@ -20,7 +20,7 @@ int main() {
   hand h = a.get_hand();
   h.print_hand();
 
-  b.print_deck(52);
+  //b.print_deck(52);
 
   return 0;
 }

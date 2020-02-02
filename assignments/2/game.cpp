@@ -73,10 +73,12 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 void game::play_game(){
+  cout << players[0].get_name() << " goes first.\n";
   while (check_win()!=true){
-    players[0].take_turn();
+    players[0].take_turn(pile, cards);
     pile.print_top();
-    players[1].take_turn();
+    players[1].auto_turn(pile, cards);
+    pile.print_top();
   }
 }
 /*******************************************************************
@@ -108,5 +110,10 @@ bool game::check_win(){
       else cout << "Computer wins!\n";
       return true;
     }
+  } else if (players[0].empty_hand()==true) {
+    cout << players[0].get_name() << " wins!\n";
+  } else if (players[1].empty_hand()==true) {
+    cout << "Computer wins!\n";
+    return true;
   }
 }

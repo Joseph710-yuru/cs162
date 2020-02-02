@@ -20,9 +20,10 @@ class player {
     void set_hand(deck &);
     void set_name(string);
     void play_game();
-    void take_turn();
+    void take_turn(deck &, deck &);
     bool can_play(deck);
     int hand_count();
+    void auto_turn(deck &, deck &);
 };
-
+void gimmean_int(int &);
 #endif

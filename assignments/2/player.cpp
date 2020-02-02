@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "player.h"
+#include "game.h"
 
 using namespace std;
 /*******************************************************************
@@ -70,11 +71,22 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void player::take_turn(){
-  h.print_hand();
-  cout << "Play card: ";
-
-
+void player::take_turn(deck &pile, deck &stock){
+  int c,repeat=0;
+  card temp;
+  while (repeat==0){
+    h.print_hand();
+    cout << "Play card: ";
+    gimmean_int(c);
+    temp = h.get_card(c-1);
+    if (game::check_rules(temp, ) == true){
+      pile.set_cards(pile.get_n_cards()+1, temp.get_rank(), temp.get_suit());
+      pile.set_n_cards(pile.get_n_cards() + 1);
+      repeat=1;
+    } else {
+      cout << "Invalid move, try again.\n";
+    }
+  }
 }
 /*******************************************************************
 Function:
@@ -105,4 +117,28 @@ Post-Conditions:
 int player::hand_count(){
   int i = h.get_n_cards();
   return i;
+}
+/****************************************************************************
+Function: gimmean_int()
+Description: Takes a ref int as a parameter, has user assign it and checks if that
+             bad boi is a real int or not then assigns that value to the ref.
+Parameters: int &num
+Pre-Conditions: takes integer variable as parameter
+Post-Conditions: returns provided integer
+***************************************************************************/
+void gimmean_int(int &num) {
+  int repeat = 1;
+
+  cin >> num;
+
+  while (repeat == 1) {
+    if (cin.fail() == true) {
+      cin.clear();
+      cin.ignore(1000000000,'\n');
+      cout << "\tERROR: Non-Integer Input\n\tInput an integer: ";
+      cin >> num;
+    } else {
+      repeat = 0;
+    }
+  }
 }
