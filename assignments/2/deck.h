@@ -22,6 +22,7 @@ class deck {
     void print_deck(int);
     void clean();
     bool can_draw();
+    void print_top();
 };
 
 void swap_cards(card &, card &);

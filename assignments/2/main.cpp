@@ -7,16 +7,20 @@
 using namespace std;
 
 int main() {
-  deck d;
-  d.create_deck(52);
-  d.shuffle_deck();
-  hand h;
-  cout << "h created\n";
-  h.set_cards(d);
-  cout << "h cards set\n";
+  player a;
+  deck b;
+
+  a.set_name("Garrett");
+  cout << a.get_name() << endl;
+
+  b.create_deck(52);
+  b.shuffle_deck();
+  a.set_hand(b);
+
+  hand h = a.get_hand();
   h.print_hand();
-  cout << "deck check\n";
-  d.print_deck(52);
+
+  b.print_deck(52);
 
   return 0;
 }

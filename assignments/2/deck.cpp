@@ -144,8 +144,6 @@ Post-Conditions: all cards with rank moved to end of cards array and get_n_cards
 void deck::clean(){
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() == -1){
-      cout << "swap that doesnt work\n";
-      cout << n_cards - 1 << endl;
       swap_cards(cards[i], cards[n_cards - 1]);
       n_cards--;
     }
@@ -164,4 +162,15 @@ bool deck::can_draw() {
   } else {
     return true;
   }
+}
+/*******************************************************************
+Function: print_top()
+Description: print "top" card
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+void deck::print_top(){
+  cout << cards[get_n_cards()].name_rank() << " of ";
+  cout << cards[get_n_cards()].name_suit() << endl;
 }

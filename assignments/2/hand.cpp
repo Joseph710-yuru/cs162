@@ -70,6 +70,16 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
+card hand::get_card(int i){
+  return cards[i];
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
 card* hand::set_cards(deck &a){
   for (int i=0; i < n_cards; i++){
     card temp_card = a.get_cards(i);
@@ -109,8 +119,8 @@ Post-Conditions: each card in the player's hand is printed to terminal
 void hand::print_hand(){
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() != -1){
-      cout << i+1 << ". " << cards[i].get_rank() << " of ";
-      cout << cards[i].get_suit() << endl;
+      cout << i+1 << ". " << cards[i].name_rank() << " of ";
+      cout << cards[i].name_suit() << endl;
     }
   }
 }

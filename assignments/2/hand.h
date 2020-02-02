@@ -18,6 +18,7 @@ class hand {
     ~hand();
     const hand& operator=(const hand &);
     card* get_cards(int);
+    card get_card(int);
     card* set_cards(deck &);
     int get_n_cards();
     void set_n_cards(int);

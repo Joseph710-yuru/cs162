@@ -21,6 +21,7 @@ class game {
     deck set_cards();
     player set_players();
     bool check_win();
+    void play_game();
 };
 
 string get_string();

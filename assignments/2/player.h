@@ -17,9 +17,12 @@ class player {
     ~player();
     const hand get_hand();
     const string get_name();
-    void set_hand();
+    void set_hand(deck &);
     void set_name(string);
     void play_game();
+    void take_turn();
+    bool can_play(deck);
+    int hand_count();
 };
 
 #endif
