@@ -22,8 +22,10 @@ class game {
     player set_players();
     bool check_win();
     void play_game();
+    bool check_rules(card);
 };
 
+bool check_rules(card, deck &);
 string get_string();
 
 #endif

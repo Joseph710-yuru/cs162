@@ -1,17 +1,23 @@
 #include <iostream>
 #include "game.h"
+#include "card.h"
 
 using namespace std;
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: game()
+Description: default constructor, assigns user player name and auto assigns
+             computer player name
+Parameters: n/a
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: Player sets their own name, computer name auto set.
 ********************************************************************/
 game::game(){
   players[0].set_name(get_string());
   players[1].set_name("Computer");
+  cards.create_deck(52);
+  cards.shuffle_deck();
+  players[0].set_hand(cards);
+  players[1].set_hand(cards);
 }
 /*******************************************************************
 Function:
@@ -22,6 +28,23 @@ Post-Conditions:
 ********************************************************************/
 game::~game(){
 
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+void game::play_game(){
+  cout << players[0].get_name() << " goes first.\n";
+  while (check_win()==false){
+    players[0].take_turn(pile, cards);
+    cout << "Top of pile: ";
+    pile.print_top();
+    //players[1].auto_turn(pile, cards);
+    //pile.print_top();
+  }
 }
 /*******************************************************************
 Function:
@@ -65,28 +88,13 @@ Post-Conditions:
 player game::set_players(){
 
 }
+
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: get_string()
+Description: prompts user for a user name, accepts a string input
+Parameters: n/a
 Pre-Conditions:
-Post-Conditions:
-********************************************************************/
-void game::play_game(){
-  cout << players[0].get_name() << " goes first.\n";
-  while (check_win()!=true){
-    players[0].take_turn(pile, cards);
-    pile.print_top();
-    players[1].auto_turn(pile, cards);
-    pile.print_top();
-  }
-}
-/*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Post-Conditions: returns a string defined by the user
 ********************************************************************/
 string get_string(){
   string temp;
@@ -95,11 +103,11 @@ string get_string(){
   return temp;
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: check_win()
+Description: checks if any win condition is met and returns true if it is
+Parameters: n/a
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: returns true if win condition met, false otherwise.
 ********************************************************************/
 bool game::check_win(){
   if (cards.can_draw() == false) {
@@ -112,8 +120,10 @@ bool game::check_win(){
     }
   } else if (players[0].empty_hand()==true) {
     cout << players[0].get_name() << " wins!\n";
-  } else if (players[1].empty_hand()==true) {
-    cout << "Computer wins!\n";
     return true;
+  //} else if (players[1].empty_hand()==true) {
+  //  cout << "Computer wins!\n";
+  //  return true;
   }
+  return false;
 }

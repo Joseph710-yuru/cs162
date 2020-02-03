@@ -52,7 +52,7 @@ Post-Conditions: assigns member variable rank to value of int parameter
                  within a specified range.
 ********************************************************************/
 void card::set_rank(int num){
-  if (num >= 0 && num < 12){
+  if (num >= 0 && num <= 12){
     rank = num;
   } else if (num == -1){
     rank = num;
@@ -70,7 +70,7 @@ void card::set_suit(int num){
   if (num>=0 && num <4){
     suit = num;
   } else if (num == -1){
-    rank = num;
+    suit = num;
   }
 }
 /*******************************************************************

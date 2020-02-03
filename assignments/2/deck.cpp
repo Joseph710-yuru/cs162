@@ -14,8 +14,8 @@ Post-Conditions: initializes a new deck with default member values of 0
 ********************************************************************/
 deck::deck() {
   for (int j=0; j < 52; j++){
-    cards[j].set_rank(0);
-    cards[j].set_suit(0);
+    cards[j].set_rank(-1);
+    cards[j].set_suit(-1);
   }
   n_cards = 52;
 }
@@ -41,8 +41,8 @@ void deck::create_deck(int num) {
   int index=0;
   for (int i=0; i < 4; i++){
     for (int j=0; j<13; j++){
-      cards[index].set_suit(i+1); //1-4
-      cards[index].set_rank(j+1); // 1-13
+      cards[index].set_suit(i); //1-4
+      cards[index].set_rank(j); // 1-13
       index++;
     }
   }
@@ -145,7 +145,7 @@ void deck::clean(){
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() == -1){
       swap_cards(cards[i], cards[n_cards - 1]);
-      n_cards--;
+      set_n_cards(get_n_cards() - 1);
     }
   }
 }

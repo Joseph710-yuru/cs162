@@ -2,6 +2,7 @@
 #include <string>
 #include "player.h"
 #include "game.h"
+#include "card.h"
 
 using namespace std;
 /*******************************************************************
@@ -73,20 +74,66 @@ Post-Conditions:
 ********************************************************************/
 void player::take_turn(deck &pile, deck &stock){
   int c,repeat=0;
-  card temp;
+  card temp_card;
   while (repeat==0){
+    cout << get_name() << "'s turn\nYour hand:\n";
     h.print_hand();
-    cout << "Play card: ";
+    cout << "Play card (1 - " << h.get_n_cards() << "): ";
     gimmean_int(c);
-    temp = h.get_card(c-1);
-    if (game::check_rules(temp, ) == true){
-      pile.set_cards(pile.get_n_cards()+1, temp.get_rank(), temp.get_suit());
+    temp_card = h.get_card(c-1);
+    if (check_rules(temp_card, pile) == true){
+      pile.set_cards(pile.get_n_cards()+1, temp_card.get_rank(), temp_card.get_suit());
       pile.set_n_cards(pile.get_n_cards() + 1);
+      h.remove_card(c-1);
+      h.clean();
       repeat=1;
     } else {
-      cout << "Invalid move, try again.\n";
+      cout << "Error: Invalid move, try again.\n";
     }
   }
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+void player::auto_turn(deck &pile, deck &stock){
+  card temp_card = pile.get_card(0);
+  for (int i=0; i < h.get_n_cards(); i++){
+    if (h[i].get_suit() == temp_card.get_suit()){
+      play_card(h[i], pile);
+      h.remove_card(i);
+      h.clean();
+      draw_card(h, stock);
+    } else if (h[i].get_rank() == temp_card.get_rank()){
+      play_card(h[i], pile);
+      h.remove_card(i);
+      h.clean();
+      draw_card(h, stock);
+    }
+  }
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+void player::play_card(card c, deck &pile){
+
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
+void player::draw_card(hand &h, deck &stock){
+  h.draw_cards(1, stock);
 }
 /*******************************************************************
 Function:
@@ -99,7 +146,7 @@ bool player::can_play(deck a){
   card temp1, temp2;
   temp2 = a.get_cards(0);
   for (int i=0; i < h.get_n_cards(); i++){
-    temp1 = h.get_card(0);
+    temp1 = h.get_card(i);
     if (temp1.get_rank() == 7) return true;
     if (temp1.get_rank() == temp2.get_rank() || temp1.get_suit() == temp2.get_suit()){
       return true;
@@ -108,15 +155,26 @@ bool player::can_play(deck a){
   return false;
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: hand_count()
+Description: just get_n_cards, but up another level
+Parameters: n/a
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: return number of cards in player's hand
 ********************************************************************/
 int player::hand_count(){
   int i = h.get_n_cards();
   return i;
+}
+/*******************************************************************
+Function: empty_hand()
+Description: returns true/false if player hand is empty or not.
+Parameters:
+Pre-Conditions:
+Post-Conditions: returns true if player hand is empty, false otherwise.
+********************************************************************/
+bool player::empty_hand(){
+  if (h.get_n_cards() == 0) return true;
+  else return false;
 }
 /****************************************************************************
 Function: gimmean_int()
@@ -141,4 +199,19 @@ void gimmean_int(int &num) {
       repeat = 0;
     }
   }
+}
+/*******************************************************************
+Function: check_rules()
+Description: checks if a play is valid
+Parameters: card play, deck pile
+Pre-Conditions: called with two cards as parameters
+Post-Conditions: returns true if play is valid, false otherwise
+********************************************************************/
+bool check_rules(card play, deck &pile){
+  card top_pile = pile.get_cards(0);
+  if (play.get_rank() == top_pile.get_rank()) return true;
+  else if (play.get_suit() == top_pile.get_suit()) return true;
+  else if (play.get_rank() == 8) return true;
+  else if (top_pile.get_rank() == -1) return true; // should just be the instance of an empty pile
+  else return false;
 }

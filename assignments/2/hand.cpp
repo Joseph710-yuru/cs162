@@ -136,26 +136,9 @@ void hand::clean(){
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() == -1) {
       swap_cards(cards[i], cards[n_cards]);
-      n_cards--;
+      set_n_cards(get_n_cards() - 1);
     }
   }
-}
-/*******************************************************************
-Function: num_draw()
-Description: get the number of cards to draw to fill hand
-Parameters: n/a
-Pre-Conditions:
-Post-Conditions: returns int number that corresponds to amount of cards with
-                 rank of -1 in hand.
-********************************************************************/
-int hand::num_draw(){
-  int num=0;
-  for (int i=0; i < 7; i++){
-    if (cards[i].get_rank() == -1){
-      num++;
-    }
-  }
-  return num;
 }
 /*******************************************************************
 Function:draw_cards()
@@ -169,5 +152,20 @@ void hand::draw_cards(int num, deck &deck){
     cards[n_cards + i] = deck.get_cards(i);
     deck.set_cards(i, -1, -1);
     deck.clean();
+    if (n_cards + i > n_cards){
+      n_cards = n_cards + i;
+    }
   }
+}
+/*******************************************************************
+Function: remove_card()
+Description: "removes" a card from the hand
+Parameters: int i
+Pre-Conditions: accepts integer i as parameter
+Post-Conditions: sets card[i] rank & suit to -1
+********************************************************************/
+void hand::remove_card(int i){
+  cards[i].set_suit(-1);
+  cards[i].set_rank(-1);
+  n_cards--;
 }

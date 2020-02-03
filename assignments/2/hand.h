@@ -24,8 +24,8 @@ class hand {
     void set_n_cards(int);
     void clean();
     void print_hand();
-    int num_draw();
     void draw_cards(int, deck &);
+    void remove_card(int);
 };
 
 #endif
