@@ -131,7 +131,7 @@ Post-Conditions: each card in the player's hand is printed to terminal
 void hand::print_hand(){
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() != -1){
-      cout << i+1 << ". " << cards[i].name_rank() << " of ";
+      cout << "\t" << i+1 << ". " << cards[i].name_rank() << " of ";
       cout << cards[i].name_suit() << endl;
     }
   }
@@ -162,7 +162,7 @@ Post-Conditions:
 ********************************************************************/
 void hand::draw_card(deck &deck){
     set_n_cards(get_n_cards() + 1);
-    cards[n_cards] = deck.get_cards(0);
+    cards[25] = deck.get_cards(0);
     deck.set_cards(0, -1, -1);
     deck.clean();
     clean();

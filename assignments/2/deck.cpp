@@ -27,7 +27,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 deck::~deck(){
- cout << "deck destructor called\n";
+
 }
 /*******************************************************************
 Function: create_deck()

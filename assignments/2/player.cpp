@@ -76,8 +76,8 @@ void player::take_turn(deck &pile, deck &stock){
   int c,repeat=0;
   card a;
   cout << get_name() << "'s turn\nYour hand:\n";
-  h.print_hand();
   while (repeat==0){
+    h.print_hand();
     if (can_play(pile)==true){
       cout << "Play card (1 - " << h.get_n_cards() << "): ";
       gimmean_int(c);
@@ -89,9 +89,12 @@ void player::take_turn(deck &pile, deck &stock){
       } else {
         cout << "Error: Invalid move, try again.\n";
       }
-    } else if (stock.get_n_cards() > 0){
+    } else if (can_play(pile)==false && stock.get_n_cards() > 0){
       cout << "No move available, drawing card.\n";
       h.draw_card(stock);
+    } else if (can_play(pile)==false) {
+      cout << "No move available, no cards to draw. Skipping turn.\n";
+      repeat=1;
     }
   }
 }
@@ -126,27 +129,34 @@ void player::auto_turn(deck &pile, deck &stock){
       h.draw_card(stock);
     }
   }
-  h.print_hand();
 }
 /*******************************************************************
-Function: draw_card()
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
-********************************************************************/
-
-/*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: player::play_card()
+Description: handles playing a card from hand to pile
+Parameters: card c, deck &pile, int n
+Pre-Conditions: accepts card, deck ref and int as parameters
+Post-Conditions: card gets played, everyone's happy
 ********************************************************************/
 void player::play_card(card c, deck &pile, int n){
+  int r,s,repeat=1;
+  card temp = pile.get_cards(pile.get_n_cards()-1);
+
+  if (c.get_rank()==7){
+    while (repeat==1){
+      cout << temp.name_rank() << " " << temp.name_suit() << endl;
+      cout << "8s are wild!\nChoose a suit (0-Clubs, 1-Spades, 2-Hearts, 3-Diamonds): ";
+      gimmean_int(r);
+      c.set_rank(r);
+      cout << "Choose a rank (1-Ace, 2-10, 11-Jack, 12-Queen, 13-King): ";
+      gimmean_int(s);
+      c.set_rank(s-1);
+      if (c.get_rank() == temp.get_rank() || c.get_suit() == temp.get_suit()) repeat=0;
+      else cout << "either rank or suit must match top of pile, try again.\n";
+    }
+  }
+
   pile.set_cards(pile.get_n_cards(), c.get_rank(), c.get_suit());
   pile.set_n_cards(pile.get_n_cards() + 1);
-  card temp;
   temp = pile.get_cards(pile.get_n_cards() - 1);
   h.remove_card(n);
 }
@@ -159,7 +169,7 @@ Post-Conditions:
 ********************************************************************/
 bool player::can_play(deck a){
   card temp1, temp2;
-  temp2 = a.get_cards(0);
+  temp2 = a.get_cards(a.get_n_cards()-1);
   for (int i=0; i < h.get_n_cards(); i++){
     temp1 = h.get_card(i);
     if (temp1.get_rank() == 7) return true;
@@ -223,10 +233,9 @@ Pre-Conditions: called with two cards as parameters
 Post-Conditions: returns true if play is valid, false otherwise
 ********************************************************************/
 bool check_rules(card play, deck &pile){
-  card top_pile = pile.get_cards(0);
+  card top_pile = pile.get_cards(pile.get_n_cards() - 1);
   if (play.get_rank() == top_pile.get_rank()) return true;
   else if (play.get_suit() == top_pile.get_suit()) return true;
-  else if (play.get_rank() == 8) return true;
-  else if (top_pile.get_rank() == -1) return true; // should just be the instance of an empty pile
+  else if (play.get_rank() == 7) return true;
   else return false;
 }

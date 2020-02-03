@@ -130,9 +130,9 @@ bool game::check_win(){
   } else if (players[0].empty_hand()==true) {
     cout << players[0].get_name() << " wins!\n";
     return true;
-  //} else if (players[1].empty_hand()==true) {
-  //  cout << "Computer wins!\n";
-  //  return true;
+  } else if (players[1].empty_hand()==true) {
+    cout << "Computer wins!\n";
+    return true;
   }
   return false;
 }
