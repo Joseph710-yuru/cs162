@@ -21,6 +21,7 @@ game::game(){
   players[1].set_hand(cards);
   card temp = cards.get_cards(0);
   pile.set_cards(0, temp.get_rank(), temp.get_suit());
+  pile.set_n_cards(pile.get_n_cards() + 1);
   cards.set_cards(0, -1, -1);
   cards.clean();
 }
@@ -45,14 +46,14 @@ void game::play_game(){
   cout << players[0].get_name() << " goes first.\n";
   cout << "Top of pile: ";
   pile.print_top();
-//  while (check_win()==false){
+  while (check_win()==false){
     players[0].take_turn(pile, cards);
     cout << "You played: ";
     pile.print_top();
     players[1].auto_turn(pile, cards);
     cout << "The computer played: ";
     pile.print_top();
-  //}
+  }
 }
 /*******************************************************************
 Function:

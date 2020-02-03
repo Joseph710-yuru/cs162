@@ -3,33 +3,33 @@
 
 using namespace std;
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: hand()
+Description: default constructor for class hand
+Parameters: n/a
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: object of type hand is constructed
 ********************************************************************/
 hand::hand(){
  n_cards = 7;
- cards = new card[n_cards];
+ cards = new card[26];
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: hand()
+Description: constructor for hand with a parameter of int, incrase you want to
+Parameters: int
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: hand with n_cards and array size of whatever you want
 ********************************************************************/
 hand::hand(int n){
  n_cards = n;
  cards = new card[n_cards];
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: hand::hand()
+Description: copy constructor
+Parameters: const hand &hand1
+Pre-Conditions: you're tryin to copy a hand to another hand
+Post-Conditions: non-shallow copy of hand created
 ********************************************************************/
 hand::hand(const hand &hand1){
   this->n_cards = hand1.n_cards;
@@ -39,8 +39,8 @@ hand::hand(const hand &hand1){
   }
 }
 /*******************************************************************
-Function:
-Description:
+Function: hand::operator=()
+Description: assignment operator overload for objects of type hand
 Parameters:
 Pre-Conditions:
 Post-Conditions:
@@ -55,42 +55,42 @@ const hand& hand::operator=(const hand& hand1){
   return *this;
 }
 /*******************************************************************
-Function:
-Description:
+Function: hand::~hand()
+Description: default destructor for hand
 Parameters:
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: deletes the dynamically allocated array within a hand
+                 so we dont get a memory leak
 ********************************************************************/
 hand::~hand(){
-  cout << "hand destroyed\n";
   delete [] cards;
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: hand::get_cards()
+Description: accessor for cards
+Parameters: int i, dont remember why i did that but it's there
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: you've got access, like, total access. Dont call this
 ********************************************************************/
 card* hand::get_cards(int i){
  return cards;
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: hand::get_card()
+Description: returns a specific card from your hand, way more useful. maybe.
+Parameters: int i
+Pre-Conditions: accepts an int as a parameter
+Post-Conditions: returns specific card from a hand
 ********************************************************************/
 card hand::get_card(int i){
   return cards[i];
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: hand::set_cards()
+Description:: basically an initial draw from deck function
+Parameters: deck &a
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: "all" your cards have real values now
 ********************************************************************/
 card* hand::set_cards(deck &a){
   for (int i=0; i < n_cards; i++){
@@ -129,7 +129,6 @@ Pre-Conditions:
 Post-Conditions: each card in the player's hand is printed to terminal
 ********************************************************************/
 void hand::print_hand(){
-  cout << "n_cards: " << n_cards << endl;
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() != -1){
       cout << i+1 << ". " << cards[i].name_rank() << " of ";
@@ -138,7 +137,7 @@ void hand::print_hand(){
   }
 }
 /*******************************************************************
-Function: clean()
+Function: clean()  h.set_n_cards(7);
 Description: removes "empty" cards from hand
 Parameters: n/a
 Pre-Conditions:
@@ -146,11 +145,10 @@ Post-Conditions: any card with -1 value is removed from hand
                  hand is sorted and n_cards is adjusted
 ********************************************************************/
 void hand::clean(){
-  for (int i=0; i < n_cards; i++){
-    if (cards[i].get_rank() == -1 && cards[n_cards-1].get_rank() != -1){
+  for (int i=0; i < 26; i++){
+    if (cards[i].get_rank() == -1 && cards[25].get_rank() != -1){
       if (cards[i].get_rank() == -1) {
-        swap_cards(cards[i], cards[n_cards-1]);
-        set_n_cards(get_n_cards() - 1);
+        swap_cards(cards[i], cards[25]);
       }
     }
   }
@@ -167,7 +165,7 @@ void hand::draw_card(deck &deck){
     cards[n_cards] = deck.get_cards(0);
     deck.set_cards(0, -1, -1);
     deck.clean();
-    n_cards++;
+    clean();
 }
 /*******************************************************************
 Function: remove_card()

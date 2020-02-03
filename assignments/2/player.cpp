@@ -6,48 +6,48 @@
 
 using namespace std;
 /*******************************************************************
-Function:
-Description:
-Parameters:
+Function: player()
+Description: default constructor for player class
+Parameters: n/a
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: object of type player is created
 ********************************************************************/
 player::player(){
 
 }
 /*******************************************************************
-Function:
-Description:
+Function: ~player()
+Description: default destructor for player class
 Parameters:
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: object of type player is destructed
 ********************************************************************/
 player::~player(){
 
 }
 /*******************************************************************
-Function:
-Description:
+Function: player::get_hand()
+Description: accessor for hand private member variable
 Parameters:
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: returns const hand
 ********************************************************************/
 const hand player::get_hand(){
   return h;
 }
 /*******************************************************************
-Function:
-Description:
+Function: player::get_name()
+Description: accessor for name private member variable
 Parameters:
 Pre-Conditions:
-Post-Conditions:
+Post-Conditions: returns the value of name
 ********************************************************************/
 const string player::get_name(){
   return name;
 }
 /*******************************************************************
-Function:
-Description:
+Function: set_hand()
+Description: sets all the cards in a hand to value of cards in a deck
 Parameters:
 Pre-Conditions:
 Post-Conditions:
@@ -66,31 +66,34 @@ void player::set_name(string n){
   name = n;
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: player::take_turn()
+Description: runs through an entire turn for the given player
+Parameters:  deck &pile, deck &stock
+Pre-Conditions: accepts two decks as parameters
+Post-Conditions: you do a turn
 ********************************************************************/
 void player::take_turn(deck &pile, deck &stock){
   int c,repeat=0;
   card a;
+  cout << get_name() << "'s turn\nYour hand:\n";
+  h.print_hand();
   while (repeat==0){
-    cout << get_name() << "'s turn\nYour hand:\n";
-    h.print_hand();
-    cout << "Play card (1 - " << h.get_n_cards() << "): ";
-    gimmean_int(c);
-    a = h.get_card(c-1);
-    if (check_rules(a, pile) == true){
-      play_card(h.get_card(c-1), pile);
-      h.remove_card(c-1);
+    if (can_play(pile)==true){
+      cout << "Play card (1 - " << h.get_n_cards() << "): ";
+      gimmean_int(c);
+      a = h.get_card(c-1);
+      if (check_rules(a, pile) == true){
+        play_card(h.get_card(c-1), pile, c-1);
+        h.draw_card(stock);
+        repeat=1;
+      } else {
+        cout << "Error: Invalid move, try again.\n";
+      }
+    } else if (stock.get_n_cards() > 0){
+      cout << "No move available, drawing card.\n";
       h.draw_card(stock);
-      repeat=1;
-    } else {
-      cout << "Error: Invalid move, try again.\n";
     }
   }
-
 }
 /*******************************************************************
 Function: auto_turn()
@@ -109,25 +112,25 @@ void player::auto_turn(deck &pile, deck &stock){
       for (int i=0; i < h.get_n_cards(); i++){
         temp2 = h.get_card(i);
         if (temp2.get_suit() == top_card.get_suit()){
-          play_card(h.get_card(i), pile);
-          h.remove_card(i);
+          play_card(h.get_card(i), pile, i);
           h.draw_card(stock);
           break;
         } else if (temp2.get_rank() == top_card.get_rank()){
-          play_card(h.get_card(i), pile);
-          h.remove_card(i);
+          play_card(h.get_card(i), pile, i);
           h.draw_card(stock);
           break;
         }
       }
-    } else {
+    } else if (stock.get_n_cards() > 0){
+      cout << "No move available, drawing card.\n";
       h.draw_card(stock);
     }
   }
+  h.print_hand();
 }
 /*******************************************************************
 Function: draw_card()
-Description: 
+Description:
 Parameters:
 Pre-Conditions:
 Post-Conditions:
@@ -140,12 +143,12 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void player::play_card(card c, deck &pile){
-  cout << "c: " << c.get_rank() << " " << c.get_suit() << endl;
+void player::play_card(card c, deck &pile, int n){
   pile.set_cards(pile.get_n_cards(), c.get_rank(), c.get_suit());
   pile.set_n_cards(pile.get_n_cards() + 1);
   card temp;
   temp = pile.get_cards(pile.get_n_cards() - 1);
+  h.remove_card(n);
 }
 /*******************************************************************
 Function:
