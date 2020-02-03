@@ -130,8 +130,10 @@ Post-Conditions: card a has the inital value of b and vice versa
 void swap_cards(card &a, card &b){
   card temp_card;
   temp_card = a;
-  a = b;
-  b = temp_card;
+  //if (temp_card.get_rank() != NULL){
+    a = b;
+    b = temp_card;
+//  }
 }
 /*******************************************************************
 Function: deck::clean()
@@ -171,6 +173,10 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 void deck::print_top(){
-  cout << cards[get_n_cards()].name_rank() << " of ";
-  cout << cards[get_n_cards()].name_suit() << endl;
+  if (cards[n_cards-1].get_rank() == -1){
+    cout << "uninitialized\n";
+  } else {
+    cout << cards[n_cards-1].name_rank() << " of ";
+    cout << cards[n_cards-1].name_suit() << endl;
+  }
 }

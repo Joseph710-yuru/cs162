@@ -74,47 +74,65 @@ Post-Conditions:
 ********************************************************************/
 void player::take_turn(deck &pile, deck &stock){
   int c,repeat=0;
-  card temp_card;
+  card a;
   while (repeat==0){
     cout << get_name() << "'s turn\nYour hand:\n";
     h.print_hand();
     cout << "Play card (1 - " << h.get_n_cards() << "): ";
     gimmean_int(c);
-    temp_card = h.get_card(c-1);
-    if (check_rules(temp_card, pile) == true){
-      pile.set_cards(pile.get_n_cards()+1, temp_card.get_rank(), temp_card.get_suit());
-      pile.set_n_cards(pile.get_n_cards() + 1);
+    a = h.get_card(c-1);
+    if (check_rules(a, pile) == true){
+      play_card(h.get_card(c-1), pile);
       h.remove_card(c-1);
-      h.clean();
+      h.draw_card(stock);
       repeat=1;
     } else {
       cout << "Error: Invalid move, try again.\n";
     }
   }
+
 }
 /*******************************************************************
-Function:
-Description:
+Function: auto_turn()
+Description: handles the computer's turns
+Parameters: deck &, deck &
+Pre-Conditions: accepts two decks as parameters
+Post-Conditions: computer's turn complete
+********************************************************************/
+void player::auto_turn(deck &pile, deck &stock){
+  int repeat = 1;
+  card top_card = pile.get_cards(pile.get_n_cards() - 1), temp2;
+
+  while (repeat==1){
+    if (can_play(pile)==true){
+      repeat = 0;
+      for (int i=0; i < h.get_n_cards(); i++){
+        temp2 = h.get_card(i);
+        if (temp2.get_suit() == top_card.get_suit()){
+          play_card(h.get_card(i), pile);
+          h.remove_card(i);
+          h.draw_card(stock);
+          break;
+        } else if (temp2.get_rank() == top_card.get_rank()){
+          play_card(h.get_card(i), pile);
+          h.remove_card(i);
+          h.draw_card(stock);
+          break;
+        }
+      }
+    } else {
+      h.draw_card(stock);
+    }
+  }
+}
+/*******************************************************************
+Function: draw_card()
+Description: 
 Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
-void player::auto_turn(deck &pile, deck &stock){
-  card temp_card = pile.get_card(0);
-  for (int i=0; i < h.get_n_cards(); i++){
-    if (h[i].get_suit() == temp_card.get_suit()){
-      play_card(h[i], pile);
-      h.remove_card(i);
-      h.clean();
-      draw_card(h, stock);
-    } else if (h[i].get_rank() == temp_card.get_rank()){
-      play_card(h[i], pile);
-      h.remove_card(i);
-      h.clean();
-      draw_card(h, stock);
-    }
-  }
-}
+
 /*******************************************************************
 Function:
 Description:
@@ -123,17 +141,11 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 void player::play_card(card c, deck &pile){
-
-}
-/*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
-********************************************************************/
-void player::draw_card(hand &h, deck &stock){
-  h.draw_cards(1, stock);
+  cout << "c: " << c.get_rank() << " " << c.get_suit() << endl;
+  pile.set_cards(pile.get_n_cards(), c.get_rank(), c.get_suit());
+  pile.set_n_cards(pile.get_n_cards() + 1);
+  card temp;
+  temp = pile.get_cards(pile.get_n_cards() - 1);
 }
 /*******************************************************************
 Function:

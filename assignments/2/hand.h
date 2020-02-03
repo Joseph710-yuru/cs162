@@ -14,6 +14,7 @@ class hand {
   public:
     // must have constructors, destructor, accessor methods, and mutator methods
     hand();
+    hand(int);
     hand(const hand&);
     ~hand();
     const hand& operator=(const hand &);
@@ -24,7 +25,7 @@ class hand {
     void set_n_cards(int);
     void clean();
     void print_hand();
-    void draw_cards(int, deck &);
+    void draw_card(deck &);
     void remove_card(int);
 };
 

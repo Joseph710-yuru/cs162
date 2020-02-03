@@ -12,12 +12,17 @@ Pre-Conditions:
 Post-Conditions: Player sets their own name, computer name auto set.
 ********************************************************************/
 game::game(){
+  pile.set_n_cards(0);
   players[0].set_name(get_string());
   players[1].set_name("Computer");
   cards.create_deck(52);
   cards.shuffle_deck();
   players[0].set_hand(cards);
   players[1].set_hand(cards);
+  card temp = cards.get_cards(0);
+  pile.set_cards(0, temp.get_rank(), temp.get_suit());
+  cards.set_cards(0, -1, -1);
+  cards.clean();
 }
 /*******************************************************************
 Function:
@@ -38,13 +43,16 @@ Post-Conditions:
 ********************************************************************/
 void game::play_game(){
   cout << players[0].get_name() << " goes first.\n";
-  while (check_win()==false){
+  cout << "Top of pile: ";
+  pile.print_top();
+//  while (check_win()==false){
     players[0].take_turn(pile, cards);
-    cout << "Top of pile: ";
+    cout << "You played: ";
     pile.print_top();
-    //players[1].auto_turn(pile, cards);
-    //pile.print_top();
-  }
+    players[1].auto_turn(pile, cards);
+    cout << "The computer played: ";
+    pile.print_top();
+  //}
 }
 /*******************************************************************
 Function:

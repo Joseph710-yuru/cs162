@@ -102,7 +102,7 @@ Post-Conditions: returns the name respective to rank value.
 ********************************************************************/
 string card::name_rank(){
   if (rank > 0 && rank < 10){
-    return to_string(rank);
+    return to_string(rank + 1);
   } else if (rank == 0){
     return "Ace";
   }else if (rank == 10){
@@ -111,7 +111,5 @@ string card::name_rank(){
     return "Queen";
   } else if (rank == 12){
     return "King";
-  } else if (rank < 10 && rank > 0) {
-    return to_string(rank + 1);
   }
 }

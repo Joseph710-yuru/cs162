@@ -20,6 +20,17 @@ Parameters:
 Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
+hand::hand(int n){
+ n_cards = n;
+ cards = new card[n_cards];
+}
+/*******************************************************************
+Function:
+Description:
+Parameters:
+Pre-Conditions:
+Post-Conditions:
+********************************************************************/
 hand::hand(const hand &hand1){
   this->n_cards = hand1.n_cards;
   this->cards = new card[this->n_cards];
@@ -51,6 +62,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 hand::~hand(){
+  cout << "hand destroyed\n";
   delete [] cards;
 }
 /*******************************************************************
@@ -117,6 +129,7 @@ Pre-Conditions:
 Post-Conditions: each card in the player's hand is printed to terminal
 ********************************************************************/
 void hand::print_hand(){
+  cout << "n_cards: " << n_cards << endl;
   for (int i=0; i < n_cards; i++){
     if (cards[i].get_rank() != -1){
       cout << i+1 << ". " << cards[i].name_rank() << " of ";
@@ -134,9 +147,11 @@ Post-Conditions: any card with -1 value is removed from hand
 ********************************************************************/
 void hand::clean(){
   for (int i=0; i < n_cards; i++){
-    if (cards[i].get_rank() == -1) {
-      swap_cards(cards[i], cards[n_cards]);
-      set_n_cards(get_n_cards() - 1);
+    if (cards[i].get_rank() == -1 && cards[n_cards-1].get_rank() != -1){
+      if (cards[i].get_rank() == -1) {
+        swap_cards(cards[i], cards[n_cards-1]);
+        set_n_cards(get_n_cards() - 1);
+      }
     }
   }
 }
@@ -147,25 +162,23 @@ Parameters: deck &
 Pre-Conditions: accepts a deck as a parameter
 Post-Conditions:
 ********************************************************************/
-void hand::draw_cards(int num, deck &deck){
-  for (int i=0; i < num; i++){
-    cards[n_cards + i] = deck.get_cards(i);
-    deck.set_cards(i, -1, -1);
+void hand::draw_card(deck &deck){
+    set_n_cards(get_n_cards() + 1);
+    cards[n_cards] = deck.get_cards(0);
+    deck.set_cards(0, -1, -1);
     deck.clean();
-    if (n_cards + i > n_cards){
-      n_cards = n_cards + i;
-    }
-  }
+    n_cards++;
 }
 /*******************************************************************
 Function: remove_card()
 Description: "removes" a card from the hand
 Parameters: int i
 Pre-Conditions: accepts integer i as parameter
-Post-Conditions: sets card[i] rank & suit to -1
+Post-Conditions: sets cards[i] rank & suit to -1
 ********************************************************************/
 void hand::remove_card(int i){
+  set_n_cards(get_n_cards() - 1);
   cards[i].set_suit(-1);
   cards[i].set_rank(-1);
-  n_cards--;
+  clean();
 }
