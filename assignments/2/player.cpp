@@ -90,10 +90,10 @@ void player::take_turn(deck &pile, deck &stock){
         cout << "Error: Invalid move, try again.\n";
       }
     } else if (can_play(pile)==false && stock.get_n_cards() > 0){
-      cout << "No move available, drawing card.\n";
+      cout << "No move available, drawing card...\nYour Hand:\n";
       h.draw_card(stock);
     } else if (can_play(pile)==false) {
-      cout << "No move available, no cards to draw. Skipping turn.\n";
+      cout << "No move available and no cards to draw. Skipping turn.\n";
       repeat=1;
     }
   }
@@ -108,7 +108,7 @@ Post-Conditions: computer's turn complete
 void player::auto_turn(deck &pile, deck &stock){
   int repeat = 1;
   card top_card = pile.get_cards(pile.get_n_cards() - 1), temp2;
-
+  cout << "Computer's turn\n";
   while (repeat==1){
     if (can_play(pile)==true){
       repeat = 0;
@@ -116,17 +116,24 @@ void player::auto_turn(deck &pile, deck &stock){
         temp2 = h.get_card(i);
         if (temp2.get_suit() == top_card.get_suit()){
           play_card(h.get_card(i), pile, i);
-          h.draw_card(stock);
+          if (stock.get_n_cards() > 0) h.draw_card(stock);
           break;
         } else if (temp2.get_rank() == top_card.get_rank()){
           play_card(h.get_card(i), pile, i);
-          h.draw_card(stock);
+          if (stock.get_n_cards() > 0) h.draw_card(stock);
+          break;
+        } else if (temp2.get_rank() == 7) {
+          play_wild_card(h.get_card(i), pile, i);
+          if (stock.get_n_cards() > 0) h.draw_card(stock);
           break;
         }
       }
     } else if (stock.get_n_cards() > 0){
       cout << "No move available, drawing card.\n";
       h.draw_card(stock);
+    } else if (can_play(pile)==false && stock.get_n_cards() == 0){
+      cout << "No move available and no card to draw, skipping turn.\n";
+      repeat = 0;
     }
   }
 }
@@ -143,15 +150,14 @@ void player::play_card(card c, deck &pile, int n){
 
   if (c.get_rank()==7){
     while (repeat==1){
-      cout << temp.name_rank() << " " << temp.name_suit() << endl;
-      cout << "8s are wild!\nChoose a suit (0-Clubs, 1-Spades, 2-Hearts, 3-Diamonds): ";
+      cout << "\t8s are wild!\n\tChoose a suit (0-Clubs, 1-Spades, 2-Hearts, 3-Diamonds): ";
       gimmean_int(r);
-      c.set_rank(r);
-      cout << "Choose a rank (1-Ace, 2-10, 11-Jack, 12-Queen, 13-King): ";
+      c.set_suit(r);
+      cout << "\tChoose a rank (1-Ace, 2-10, 11-Jack, 12-Queen, 13-King): ";
       gimmean_int(s);
       c.set_rank(s-1);
       if (c.get_rank() == temp.get_rank() || c.get_suit() == temp.get_suit()) repeat=0;
-      else cout << "either rank or suit must match top of pile, try again.\n";
+      else cout << "\tError: either rank or suit must match top of pile, try again.\n";
     }
   }
 
@@ -161,11 +167,31 @@ void player::play_card(card c, deck &pile, int n){
   h.remove_card(n);
 }
 /*******************************************************************
-Function:
-Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+Function: player::play_wild_card()
+Description: handles playing a card from hand to pile
+Parameters: card c, deck &pile, int n
+Pre-Conditions: accepts card, deck ref and int as parameters
+Post-Conditions: card gets played, everyone's happy
+********************************************************************/
+void player::play_wild_card(card c, deck &pile, int n){
+  card temp = pile.get_cards(pile.get_n_cards()-1);
+  cout << "Computer played a wild card.\n";
+  if (c.get_rank()==7){
+      c.set_suit(temp.get_suit());
+      c.set_rank(rand() % 13);
+    }
+
+  pile.set_cards(pile.get_n_cards(), c.get_rank(), c.get_suit());
+  pile.set_n_cards(pile.get_n_cards() + 1);
+  temp = pile.get_cards(pile.get_n_cards() - 1);
+  h.remove_card(n);
+}
+/*******************************************************************
+Function: can_play()
+Description: checks if a user has a valid move this turn
+Parameters: deck a
+Pre-Conditions: accepts a deck as a parameter
+Post-Conditions: returns true if there's a valid move, false otherwise
 ********************************************************************/
 bool player::can_play(deck a){
   card temp1, temp2;

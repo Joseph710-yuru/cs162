@@ -33,7 +33,7 @@ Pre-Conditions:
 Post-Conditions:
 ********************************************************************/
 game::~game(){
-
+ cout << "Destructor called\n";
 }
 /*******************************************************************
 Function:
@@ -48,10 +48,10 @@ void game::play_game(){
   pile.print_top();
   while (check_win()==false){
     players[0].take_turn(pile, cards);
-    cout << "You played: ";
+    cout << "Top of the pile is: ";
     pile.print_top();
     players[1].auto_turn(pile, cards);
-    cout << "The computer played: ";
+    cout << "Top of the pile is: ";
     pile.print_top();
   }
 }
@@ -124,14 +124,14 @@ bool game::check_win(){
       return false;
     } else {
       if (players[0].hand_count() > players[1].hand_count()) cout << "Player wins!\n";
-      else cout << "Computer wins!\n";
+      else cout << "The computer has fewer cards and wins!\n";
       return true;
     }
   } else if (players[0].empty_hand()==true) {
-    cout << players[0].get_name() << " wins!\n";
+    cout << players[0].get_name() << "'s hand is empty and wins!\n";
     return true;
   } else if (players[1].empty_hand()==true) {
-    cout << "Computer wins!\n";
+    cout << "Computer's hand is empty and wins!\n";
     return true;
   }
   return false;

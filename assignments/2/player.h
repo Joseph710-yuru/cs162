@@ -26,6 +26,7 @@ class player {
     void auto_turn(deck &, deck &);
     bool empty_hand();
     void play_card(card, deck &, int);
+    void play_wild_card(card, deck &, int);
     void increase_hand();
 };
 void gimmean_int(int &);

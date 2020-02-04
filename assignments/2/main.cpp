@@ -15,20 +15,14 @@
 using namespace std;
 
 int main() {
-  game a;
-  a.play_game();
-/*
-  deck stock, pile;
-  hand a, b;
-  stock.create_deck(52);
-  stock.shuffle_deck();
-  a.set_cards(stock);
-  card l = a.get_card(0);
-  cout << l.name_rank() << " " << l.name_suit() << endl;
-  a.remove_card(0);
-
-  //b.print_deck(52);
-*/
+  int repeat=1;
+  while (repeat==1){
+    game a;
+    a.play_game();
+    cout << "Would you like to play again? (0-no, 1-yes): ";
+    gimmean_int(repeat);
+    a.~game();
+  }
   return 0;
 }
 

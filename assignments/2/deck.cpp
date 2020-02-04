@@ -41,8 +41,8 @@ void deck::create_deck(int num) {
   int index=0;
   for (int i=0; i < 4; i++){
     for (int j=0; j<13; j++){
-      cards[index].set_suit(i); //1-4
-      cards[index].set_rank(j); // 1-13
+      cards[index].set_suit(i); //0-3
+      cards[index].set_rank(j); // 0-12
       index++;
     }
   }
