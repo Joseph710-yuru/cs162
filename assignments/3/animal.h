@@ -11,7 +11,7 @@ class animal {
     int age; // months
   public:
     animal();
-    ~animal();
+    //~animal();
     void set_name(string);
     void set_age(int);
     string get_name();

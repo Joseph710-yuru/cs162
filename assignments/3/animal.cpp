@@ -5,7 +5,7 @@ using namespace std;
 
 animal::animal(){
   name = "Unnamed";
-  age = "0";
+  age = 0;
 }
 
 void animal::set_name(string a){

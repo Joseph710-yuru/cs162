@@ -9,7 +9,7 @@ class tiger : public animal {
   private:
 
   public:
-
+    string namegen();
 };
 
 #endif
