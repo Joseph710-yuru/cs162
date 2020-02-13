@@ -45,37 +45,37 @@ int zoo::get_boom(){
 Mutator for n_
 *************/
 void zoo::set_n_tigers(int a){
-
+  n_tiger = a;
 }
 /*************
 Mutator for n_
 *************/
 void zoo::set_n_blackbears(int a){
-
+  n_blackbears = a;
 }
 /*************
 Mutator for n_
 *************/
 void zoo::set_n_sealions(int a){
-
+  n_sealions = a;
 }
 /*************
 Mutator for bank
 *************/
 void zoo::set_bank(int a){
-
+  bank = a;
 }
 /*************
 Mutator for food_base
 *************/
 void zoo::set_food_base(float a){
-
+  food_base = a;
 }
 /*************
 Mutator for boom
 *************/
 void zoo::set_boom(int a){
-
+  boom = a;
 }
 //tiger, blackbear and sealion accessors need to be added
 /*****************************************
