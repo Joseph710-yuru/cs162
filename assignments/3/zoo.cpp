@@ -66,7 +66,11 @@ int zoo::get_boom(){
 *****************************************/
 //Mutator for n_
 void zoo::set_n_tigers(int a){
+<<<<<<< HEAD
  n_tigers = a;
+=======
+  n_tiger = a;
+>>>>>>> c81baceb9c8afe2029ccdbdffe0f0e09540e8fd5
 }
 //Mutator for n_
 void zoo::set_n_blackbears(int a){
