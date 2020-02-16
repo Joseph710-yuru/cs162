@@ -350,7 +350,7 @@ void zoo::buy_tigers(){
       } else if (num == 2 && bank >= 24000) {
         tigers[n_tigers].bought();
         tigers[n_tigers+1].bought();
-        cout << "Tigers " << tigers[n_tigers].get_name() << " and "";
+        cout << "Tigers " << tigers[n_tigers].get_name() << " and ";
         cout << tigers[n_tigers+1].get_name() << "purchased!\n";
         n_tigers = n_tigers + 2;
         repeat = 0;
@@ -378,7 +378,7 @@ void zoo::buy_sealions() {
       } else if (num == 2 && bank >= 1400) {
         sealions[n_sealions].bought();
         sealions[n_sealions+1].bought();
-        cout << "Sea lions " << sealions[n_sealions].get_name() << " and "";
+        cout << "Sea lions " << sealions[n_sealions].get_name() << " and ";
         cout << sealions[n_sealions+1].get_name() << " purchased!\n";
         n_sealions = n_sealions + 2;
         repeat = 0;
@@ -406,7 +406,7 @@ void zoo::buy_blackbears(){
       } else if (num == 2 && bank >= 10000) {
         blackbears[n_blackbears].bought();
         blackbears[n_blackbears+1].bought();
-        cout << "Black bears " << blackbears[n_blackbears].get_name() << " and "";
+        cout << "Black bears " << blackbears[n_blackbears].get_name() << " and ";
         cout << blackbears[n_blackbears+1].get_name() << " purchased!\n";
         n_blackbears = n_blackbears + 2;
         repeat = 0;
