@@ -2,7 +2,22 @@
 #include <string>
 
 using namespace std;
-
+//constructor
+blackbear::blackbear(){
+  set_name("noname");
+  set_age(-1);
+}
+// birth() - allocates name and sets age to zero
+void blackbear::birth(){
+  set_name(namegen());
+  set_age(0);
+}
+// bought() - generates name and sets age to 48
+void blackbear::bought(){
+  set_name(namegen());
+  set_age(48);
+}
+// namegen() - Randomly selects a name from array.
 string blackbear::namegen() {
   srand(time(0));
 

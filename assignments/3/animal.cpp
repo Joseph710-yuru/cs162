@@ -4,8 +4,8 @@
 using namespace std;
 
 animal::animal(){
-  name = "Unnamed";
-  age = 0;
+  name = "noname";
+  age = -1;
 }
 
 void animal::set_name(string a){
@@ -32,4 +32,8 @@ bool animal::is_adult(){
 bool animal::is_baby(){
   if (age <= 6) return true;
   else return false;
+}
+void animal::kill(){
+  name = "noname";
+  age = -1;
 }

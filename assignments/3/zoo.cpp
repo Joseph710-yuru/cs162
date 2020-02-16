@@ -113,7 +113,7 @@ void zoo::sick_sealion(){
     if (bank < 350) {
       cout << "You can't afford health care for " << sealions[numbo].get_name() << ". ";
       cout << sealions[numbo].get_name() << " dies.\n";
-      kill_sealion(numbo);
+      sealions[numbo].kill();
     } else if (bank >= 350){
       cout << "The $350 veterinarian bill has been deducted from your bank.\n";
       bank -= 350;
@@ -134,7 +134,7 @@ void zoo::sick_blackbear(){
     if (bank < 2500) {
       cout << "You can't afford health care for " << blackbears[numbo].get_name() << ". ";
       cout << blackbears[numbo].get_name() << " dies.\n";
-      kill_blackbear(numbo);
+      blackbears[numbo].kill();
     } else if (bank >= 2500){
       cout << "The $2500 veterinarian bill has been deducted from your bank.\n";
       bank -= 2500;
@@ -155,7 +155,7 @@ void zoo::sick_tiger(){
     if (bank < 2500) {
       cout << "You can't afford health care for " << tigers[numbo].get_name() << ". ";
       cout << tigers[numbo].get_name() << " dies.\n";
-      kill_tiger(numbo);
+      tigers[numbo].kill();
     } else if (bank >= 2500){
       cout << "The $6000 veterinarian bill has been deducted from your bank.\n";
       bank -= 6000;
@@ -182,19 +182,22 @@ void zoo::birth_animal(int a){
 adds a baby tiger to the tiger array
 *************/
 void zoo::birth_tiger(){
-
+  tigers[n_tigers].birth();
+  n_tigers++;
 }
 /*************
 adds a baby sealion to the sealion array
 *************/
 void zoo::birth_sealion(){
-
+  sealions[n_sealions].birth();
+  n_sealions++;
 }
 /*************
 adds a baby blackbear to the blackbear array
 *************/
 void zoo::birth_blackbear(){
-
+  blackbears[n_blackbears].birth();
+  n_blackbears++;
 }
 /*****************************************
         KILL BLOCK

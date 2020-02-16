@@ -18,6 +18,7 @@ class animal {
     int get_age();
     bool is_adult();
     bool is_baby();
+    void kill();
 };
 
 #endif

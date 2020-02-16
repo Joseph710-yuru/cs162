@@ -11,6 +11,8 @@ class blackbear : public animal {
   public:
     blackbear();
     blackbear(int);
+    void bought();
+    void birth();
     string namegen();
 };
 

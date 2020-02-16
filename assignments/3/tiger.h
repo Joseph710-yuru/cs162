@@ -11,6 +11,8 @@ class tiger : public animal {
   public:
     tiger();
     tiger(int);
+    void bought();
+    void birth();
     string namegen();
 };
 

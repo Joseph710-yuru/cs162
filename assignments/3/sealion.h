@@ -12,6 +12,8 @@ class sealion : public animal {
     sealion();
     sealion(int);
     string namegen();
+    void birth();
+    void bought();
 };
 
 #endif

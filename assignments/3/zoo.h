@@ -45,10 +45,6 @@ class zoo {
     void birth_tiger();
     void birth_sealion();
     void birth_blackbear();
-    //kill functions
-    void kill_sealion(int);
-    void kill_tiger(int);
-    void kill_blackbear(int);
     //monthly operations
     void run_month();
     void buy_food();

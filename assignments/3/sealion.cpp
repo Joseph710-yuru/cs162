@@ -7,10 +7,20 @@
 using namespace std;
 
 sealion::sealion(){
+  set_name("noname");
+  set_age(-1);
+}
+// birth() - allocates name and sets age to zero
+void sealion::birth(){
   set_name(namegen());
   set_age(0);
 }
-
+// bought() - generates name and sets age to 48
+void sealion::bought(){
+  set_name(namegen());
+  set_age(48);
+}
+// namegen() - Randomly selects a name from array.
 string sealion::namegen() {
   srand(time(0));
 
