@@ -10,6 +10,7 @@ class sealion : public animal {
 
   public:
     sealion();
+    sealion(int);
     string namegen();
 };
 

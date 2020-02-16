@@ -9,6 +9,8 @@ class blackbear : public animal {
   private:
 
   public:
+    blackbear();
+    blackbear(int);
     string namegen();
 };
 

@@ -7,15 +7,16 @@
 
 class zoo {
   private:
-    tiger tigers*;
-    sealion sealions*;
-    blackbear blackbears*;
+    tiger *tigers;
+    sealion *sealions;
+    blackbear *blackbears;
     int n_tigers;
     int n_sealions;
     int n_blackbears;
     int bank;
     int food_base;
     int boom;
+    int day;
   public:
     zoo();
     ~zoo();
@@ -44,6 +45,10 @@ class zoo {
     void birth_tiger();
     void birth_sealion();
     void birth_blackbear();
+    //kill functions
+    void kill_sealion(int);
+    void kill_tiger(int);
+    void kill_blackbear(int);
     //monthly operations
     void run_month();
     void buy_food();

@@ -1,2 +1,2 @@
 zoo:
-	g++ main.cpp zoo.cpp animal.cpp sealion.cpp blackbear.cpp tiger.cpp
+	g++ -std=c++11 main.cpp zoo.cpp animal.cpp sealion.cpp blackbear.cpp tiger.cpp

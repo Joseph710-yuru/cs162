@@ -10,14 +10,14 @@ string tiger::namegen() {
     Famous lions and names meaning lion
   */
   string names [40] = {
-    "Cowardly", "Asad", "Amra", "Aryeh", "Aslan",
-    "Jad-Bal-Ja", "Kefir", "Kojishi", "Laish", "Leander",
-    "Leon", "Lev", "Kovu", "Simba", "Mufasa",
-    "Leonardo", "Nala", "Ossama", "Sarabi", "Shir",
+    "Tony the Tiger", "Shere Khan", "Tigger", "Richard Parker", "Onitsuka",
+    "Babur", "Tigris", "Kitten", "Garfield", "Hobbes",
+    "Tygra", "Lev", "Kovu", "Satoru Sayama", "Fray Tormenta",
+    "Oliver", "Jiji", "Ossama", "Sarabi", "Salem",
     "Singapura", "Shishio", "Shetani", "Shange", "Zira",
-    "Cirilla", "Calanthe", "Shiku", "Bast", "Dilan",
-    "Corin", "Jato", "Kefira", "Kosey", "Layth",
-    "Leijona", "Loeb", "Jansher", "Hamza", "Gur"
+    "Diego", "Meowth", "Snowball", "Bast", "Dilan",
+    "Corin", "Jato", "Kefira", "Kosey", "Mr. Jinks",
+    "Jonesy", "Loeb", "Jansher", "Hamza", "Gur"
   };
 
   return names[rand() % 40];
