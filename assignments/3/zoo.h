@@ -10,13 +10,8 @@ class zoo {
     tiger *tigers;
     sealion *sealions;
     blackbear *blackbears;
-    int n_tigers;
-    int n_sealions;
-    int n_blackbears;
-    int bank;
-    int food_base;
-    int boom;
-    int day;
+    int n_tigers, n_sealions, n_blackbears, bank, boom, day;
+    float food_base;
   public:
     zoo();
     ~zoo();
@@ -45,9 +40,25 @@ class zoo {
     void birth_tiger();
     void birth_sealion();
     void birth_blackbear();
+    //kill functions
+    void kill_tiger(int);
+    void kill_sealion(int);
+    void kill_blackbear(int);
+    //buy animal functions
+    void buy_animals();
+    void buy_tigers();
+    void buy_sealions();
+    void buy_blackbears();
     //monthly operations
     void run_month();
     void buy_food();
+    void revenue();
+    void age();
+    void special_event();
     bool bankrupt();
+    //misc functions
+    void clean(animal *, int);
+    void swap_animal(animal &, animal &);
+    void gimmean_int(int &);
 };
 #endif
