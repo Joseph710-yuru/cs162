@@ -1,5 +1,7 @@
 #include "animal.h"
+
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -34,6 +36,7 @@ bool animal::is_baby(){
   else return false;
 }
 void animal::kill(){
+  cout << name << " dies.\n";
   name = "noname";
   age = -1;
 }

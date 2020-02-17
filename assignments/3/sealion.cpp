@@ -22,8 +22,6 @@ void sealion::bought(){
 }
 // namegen() - Randomly selects a name from array.
 string sealion::namegen() {
-  srand(time(0));
-
   /*
     pulled as many names of sea lions at zoos and rescues as i could find
     plus a couple others

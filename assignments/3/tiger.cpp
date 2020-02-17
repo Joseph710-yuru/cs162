@@ -18,8 +18,6 @@ void tiger::bought(){
 }
 // namegen() - Randomly selects a name from array.
 string tiger::namegen() {
-  srand(time(0));
-
   /*
     Famous tigers, cats and other feline related names
   */

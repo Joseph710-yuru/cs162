@@ -19,8 +19,6 @@ void blackbear::bought(){
 }
 // namegen() - Randomly selects a name from array.
 string blackbear::namegen() {
-  srand(time(0));
-
   /*
     i figured black bears needed sitcom and cartoon character names.
   */

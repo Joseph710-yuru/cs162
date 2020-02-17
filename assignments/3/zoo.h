@@ -10,7 +10,7 @@ class zoo {
     tiger *tigers;
     sealion *sealions;
     blackbear *blackbears;
-    int n_tigers, n_sealions, n_blackbears, bank, boom, day;
+    int n_tigers, n_sealions, n_blackbears, bank, boom, month;
     float food_base;
   public:
     zoo();
@@ -22,6 +22,7 @@ class zoo {
     int get_bank();
     float get_food_base();
     int get_boom();
+    int get_month();
     //tiger, blackbear and sealion accessor/mutators need to be added
     //mutators
     void set_n_tigers(int);
@@ -30,6 +31,7 @@ class zoo {
     void set_bank(int);
     void set_food_base(float);
     void set_boom(int);
+    void set_month(int);
     //sick functions
     void sick_animal(int);
     void sick_sealion();
@@ -56,6 +58,7 @@ class zoo {
     void age();
     void special_event();
     bool bankrupt();
+    void print_stats();
     //misc functions
     void clean(animal *, int);
     void swap_animal(animal &, animal &);
