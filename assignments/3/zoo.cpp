@@ -144,18 +144,18 @@ void zoo::sick_blackbear(){
     cout << "Your black bear, " << blackbears[numbo].get_name() << " has fallen ill.\n";
     if (blackbears[numbo].is_baby() == true){
       if (bank < 5000) {
-        cout << "You can't afford health care for poor baby " << blackbears[numbo].get_name() << ".\n";
+        cout << "\tYou can't afford health care for poor baby " << blackbears[numbo].get_name() << ".\n";
         kill_blackbear(numbo);
       } else if (bank >= 5000) {
-        cout << "The $500 veterinarian bill has been deducted from your bank account.\n";
+        cout << "\tThe $500 veterinarian bill has been deducted from your bank account.\n";
         bank -= 2500;
       }
     } else {
       if (bank < 2500) {
-        cout << "You can't afford health care for " << blackbears[numbo].get_name() << ".\n";
+        cout << "\tYou can't afford health care for " << blackbears[numbo].get_name() << ".\n";
         kill_blackbear(numbo);
       } else if (bank >= 2500){
-        cout << "The $2500 veterinarian bill has been deducted from your bank account.\n";
+        cout << "\tThe $2500 veterinarian bill has been deducted from your bank account.\n";
         bank -= 2500;
       }
     }
@@ -173,18 +173,18 @@ void zoo::sick_tiger(){
     cout << "Your tiger, " << tigers[numbo].get_name() << " has fallen ill.\n";
     if (tigers[numbo].is_baby() == true){
       if (bank < 12000){
-        cout << "You can't afford health care for poor baby " << tigers[numbo].get_name() << ".\n";
+        cout << "\tYou can't afford health care for poor baby " << tigers[numbo].get_name() << ".\n";
         kill_tiger(numbo);
       } else if (bank >= 12000) {
-        cout << "The $12000 veterinarian bill has been deducted from your bank account.\n";
+        cout << "\tThe $12000 veterinarian bill has been deducted from your bank account.\n";
         bank -= 12000;
       }
     } else {
       if (bank < 6000) {
-        cout << "You can't afford health care for " << tigers[numbo].get_name() << ".\n";
+        cout << "\tYou can't afford health care for " << tigers[numbo].get_name() << ".\n";
         kill_tiger(numbo);
       } else if (bank >= 6000){
-        cout << "The $6000 veterinarian bill has been deducted from your bank account.\n";
+        cout << "\tThe $6000 veterinarian bill has been deducted from your bank account.\n";
         bank -= 6000;
       }
     }
@@ -315,7 +315,6 @@ void zoo::age(){
 // special_event() - determines which event you get in a given month
 *************/
 void zoo::special_event(){
-  srand(time(0));
   switch ((rand() % 3)) {
     case 0: sick_animal((rand() % 3));
             break;
@@ -350,16 +349,18 @@ void zoo::buy_food(){
   cout << "Food purchased for " << num << " animals at $";
   num = (n_tigers * 5) + (n_blackbears * 3) + n_sealions;
   num = num * food_base;
-  cout << food_base << " per unit. Totaling: $" << num << endl;
+  cout << food_base << " per unit totaling: $" << num << endl;
   bank = bank - num;
-  cout << "Bank funds are now $" << bank << endl;
-  food_base = food_base * ((rand() % 5 + 8)/10);
+  food_base = food_base * ((rand() % 5 + 8)/10.0);
 }
 /*************
 // bankrupt() - Returns true if you're bankrupt, otherwise false
 *************/
 bool zoo::bankrupt(){
-  if (bank <= 0) return true;
+  if (bank <= 0) {
+    cout << "You've gone bankrupt! Game over!\n";
+    return true;
+  }
   else return false;
 }
 /*************

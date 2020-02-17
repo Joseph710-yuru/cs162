@@ -26,7 +26,7 @@ int main(){
   bamafoo.set_month(1);
   cout << endl;
 
-  while (repeat != 0){
+  while (repeat != 0 && bamafoo.bankrupt() == false){
     bamafoo.run_month();
     cout << "Continue game (0 - no, 1 - yes): ";
     cin >> repeat;

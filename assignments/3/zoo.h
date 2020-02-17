@@ -10,8 +10,8 @@ class zoo {
     tiger *tigers;
     sealion *sealions;
     blackbear *blackbears;
-    int n_tigers, n_sealions, n_blackbears, bank, boom, month;
-    float food_base;
+    int n_tigers, n_sealions, n_blackbears, boom, month;
+    float food_base, bank;
   public:
     zoo();
     ~zoo();
