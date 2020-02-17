@@ -1,7 +1,14 @@
+/**********************
+    Blackbear Class
+**********************/
+
 #include "blackbear.h"
+
 #include <string>
+#include <cstdlib>
 
 using namespace std;
+
 //constructor
 blackbear::blackbear(){
   set_name("noname");
@@ -19,9 +26,6 @@ void blackbear::bought(){
 }
 // namegen() - Randomly selects a name from array.
 string blackbear::namegen() {
-  /*
-    i figured black bears needed sitcom and cartoon character names.
-  */
   string names [40] = {
     "Grob Gob Glob Grod", "Prismo", "Abracadaniel", "N.E.P.T.R.", "Gunter",
     "Jane Lane", "Finn", "Jake", "Marceline the Vampire Queen", "Lemongrab",

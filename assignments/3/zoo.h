@@ -23,7 +23,7 @@ class zoo {
     float get_food_base();
     int get_boom();
     int get_month();
-    //tiger, blackbear and sealion accessor/mutators need to be added
+    //tiger, blackbear and sealion accessor/mutators need to be added even though i dont need them
     //mutators
     void set_n_tigers(int);
     void set_n_blackbears(int);

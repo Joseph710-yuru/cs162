@@ -1,7 +1,14 @@
+/**********************
+      Tiger Class
+**********************/
+
 #include "tiger.h"
+
 #include <string>
+#include <cstdlib>
 
 using namespace std;
+//constructor
 tiger::tiger(){
   set_name("noname");
   set_age(-1);
@@ -18,9 +25,6 @@ void tiger::bought(){
 }
 // namegen() - Randomly selects a name from array.
 string tiger::namegen() {
-  /*
-    Famous tigers, cats and other feline related names
-  */
   string names [40] = {
     "Tony the Tiger", "Shere Khan", "Tigger", "Richard Parker", "Onitsuka",
     "Babur", "Tigris", "Kitten", "Garfield", "Hobbes",

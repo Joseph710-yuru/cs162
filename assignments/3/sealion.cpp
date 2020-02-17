@@ -1,7 +1,10 @@
+/**********************
+    Sealion Class
+**********************/
+
 #include "sealion.h"
-#include <iostream>
+
 #include <string>
-#include <ctime>
 #include <cstdlib>
 
 using namespace std;
@@ -20,12 +23,9 @@ void sealion::bought(){
   set_name(namegen());
   set_age(48);
 }
+
 // namegen() - Randomly selects a name from array.
 string sealion::namegen() {
-  /*
-    pulled as many names of sea lions at zoos and rescues as i could find
-    plus a couple others
-  */
   string names [40] = {
     "Mermaid Dog", "Seapup", "Mr. Morton Slumber", "Lupe Lamora", "Kwang",
     "Domino", "Silver", "Honey Rider", "Blofield", "Max Zorin",

@@ -4,7 +4,6 @@
 #include "animal.h"
 
 #include <iostream>
-#include <ctime>
 #include <cstdlib>
 
 using namespace std;
@@ -63,7 +62,7 @@ int zoo::get_boom(){
 int zoo::get_month(){
   return month;
 }
-//tiger, blackbear and sealion accessors need to be added
+//tiger, blackbear and sealion accessors need to be added even though i dont need them
 /*****************************************
             MUTATOR BLOCK
 *****************************************/
@@ -88,7 +87,7 @@ void zoo::set_boom(int a){
 void zoo::set_month(int a){
   month = a;
 }
-//tiger, blackbear and sealion accessors need to be added
+//tiger, blackbear and sealion accessors need to be added even though they wont be used
 /*****************************************
             SICK BLOCK
 *****************************************/
@@ -196,7 +195,7 @@ void zoo::sick_tiger(){
             BIRTH BLOCK
 *****************************************/
 /*************
-determines which of the three animals have been chosen to have a baby
+birth_animal() - determines which of the three animals have been chosen to have a baby
 *************/
 void zoo::birth_animal(int a){
   switch(a) {
@@ -211,7 +210,7 @@ void zoo::birth_animal(int a){
   }
 }
 /*************
-adds a baby tiger to the tiger array
+birth_tiger() - adds a baby tiger to the tiger array
 *************/
 void zoo::birth_tiger(){
   int adults = 0;
@@ -228,7 +227,7 @@ void zoo::birth_tiger(){
   }
 }
 /*************
-adds a baby sealion to the sealion array
+birth_sealion() - adds a baby sealion to the sealion array
 *************/
 void zoo::birth_sealion(){
   int adults=0;
@@ -243,7 +242,7 @@ void zoo::birth_sealion(){
   }
 }
 /*************
-adds a baby blackbear to the blackbear array
+birth_sealion() - adds a baby blackbear to the blackbear array
 *************/
 void zoo::birth_blackbear(){
   int adults = 0;

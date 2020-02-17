@@ -1,3 +1,7 @@
+/**********************
+      Animal Class
+**********************/
+
 #include "animal.h"
 
 #include <string>
