@@ -7,29 +7,35 @@
 
 using namespace std;
 
+void print_shape_info(Shape &);
+
 int main() {
-  Shape one, last;
-  Rectangle two;
-  Circle three;
-  Square four(5);
+  try {
+    Shape *shap [3];
+    Rectangle rect;
+    Circle circ;
+    Square squar(5);
+  } catch (int a) {
+    cout << "Error occured on construction of shape.\n";
+  }
+  
+  rect.set_height(2);
+  rect.set_width(8);
+  circ.set_radius(5);
 
-  cout << "name: " << one.get_name() << " color: " << one.get_color() << endl;
-  cout << "name: " << two.get_name() << " color: " << two.get_color() << endl;
-  cout << "name: " << three.get_name() << " color: " << three.get_color() << endl;
+  shap[0] = &rect;
+  shap[1] = &circ;
+  shap[2] = &squar;
 
-  two.set_height(2);
-  two.set_width(8);
-  three.set_radius(5);
+  print_shape_info((*shap[0]));
+  print_shape_info((*shap[1]));
+  print_shape_info((*shap[2]));
 
-  cout << "Area of circle: " << three.area() << endl;
-  cout << "Area of rectange: " << two.area() << endl;
-
-  cout << "Square: \n\tWidth: " << four.get_width() << endl;
-  cout << "\tHeight: " << four.get_height() << endl;
-
-  cout << "Compare Rectangle to Circle: ";
-  if (two < three) {
-    cout << "the rectangle is larger than the cirlce\n";
-  } else cout << "The circle is larger than the rectangle\n";
   return 0;
+}
+
+void print_shape_info(Shape &a){
+  cout << "Name: " << a.get_name() << endl;
+  cout << "Color: " << a.get_color() << endl;
+  cout << "Area: " << a.area() << endl << endl;
 }

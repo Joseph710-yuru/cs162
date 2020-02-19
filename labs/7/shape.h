@@ -15,7 +15,7 @@ class Shape {
       string get_color();
       void set_name(string);
       void set_color(string);
-      int area();
+      virtual float area();
       bool operator< (Shape &);
 };
 

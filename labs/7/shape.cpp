@@ -7,8 +7,12 @@ using namespace std;
 Constructor for Shape class
 ***************************/
 Shape::Shape(){
-  name = "nameless";
-  color = "colorless";
+  try {
+    name = "nameless";
+    color = "colorless";
+  } catch (int a) {
+    cout << "Error occured on construction of shape.\n";
+  }
 }
 /**************************
 Acessor for private variable name
@@ -37,7 +41,7 @@ void Shape::set_color(string a){
 /**************************
 Function to return area of shape
 ***************************/
-int Shape::area(){
+float Shape::area(){
   return 0;
 }
 
