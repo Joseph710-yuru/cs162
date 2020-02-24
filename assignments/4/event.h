@@ -1,15 +1,15 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include <iostream>
-
 using namespace std;
 
 class event {
   private:
-    
-  public:
 
+  public:
+    virtual void percept();
+    virtual void encounter();
+    bool wake_up();
 };
 
 #endif

@@ -3,15 +3,14 @@
 
 #include "event.h"
 
-#include <iostream>
-
 using namespace std;
 
 class bats : public event {
   private:
 
   public:
-
+    void percept();
+    void encounter();
 };
 
 #endif

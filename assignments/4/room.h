@@ -2,23 +2,17 @@
 #define ROOM_H
 
 #include <string>
-#include <iostream>
 
 using namespace std;
 
 class room {
   private:
-    int x, y;
-    event *e;
+    event e;
   public:
-    room(int, int);
+    room();
     ~room();
-    int get_x();
-    int get_y();
     event get_event();
-    void set_x(int);
-    void set_y(int);
-    void set_event(&event)
+    void set_event(event &);
 };
 
 #endif

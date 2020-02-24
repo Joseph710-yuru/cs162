@@ -3,15 +3,16 @@
 
 #include "event.h"
 
-#include <iostream>
-
 using namespace std;
 
 class wumpus : public event {
   private:
-
+    int alive;
   public:
-
+    void percept();
+    void encounter();
+    void kill();
+    bool wake_up();
 };
 
 #endif
