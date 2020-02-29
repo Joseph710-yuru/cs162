@@ -11,7 +11,7 @@ using namespace std;
 class game {
   private:
     int player_x, player_y,alive,rooms;
-    room *r;
+    
   public:
     game();
     game(int);
