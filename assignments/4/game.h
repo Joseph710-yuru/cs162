@@ -10,8 +10,13 @@ using namespace std;
 
 class game {
   private:
+<<<<<<< HEAD
     int player_x, player_y, arrows, n_rooms, debug;
     vector<room> rooms;
+=======
+    int player_x, player_y,alive,rooms;
+    
+>>>>>>> 6f73821374d6f600bc88663863c8f26f9e51cdc3
   public:
     game();
     game(int);

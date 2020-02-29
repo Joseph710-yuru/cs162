@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*******************************************************************
 file: game.cpp
 description: implementation for game class
@@ -154,4 +155,20 @@ void game::print_map(){
   }
   for (int j = 0; j < 4; ++j) cout << "+---";
   cout << "+" << endl;
+=======
+game::game(){
+  player_x = 0;
+  player_y = 0;
+  alive = 1;
+  rooms = 4;
+  r = new room [rooms];
+}
+
+game::game(int ro) {
+  player_x = 0;
+  player_y = 0;
+  alive = 1;
+  rooms = ro;
+  r = new room [rooms];
+>>>>>>> 6f73821374d6f600bc88663863c8f26f9e51cdc3
 }
