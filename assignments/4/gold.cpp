@@ -5,6 +5,7 @@ description: implementation for gold class
 #include "gold.h"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 /*******************************************************************
@@ -12,27 +13,33 @@ Function:
 Description:
 *******************************************************************/
 gold::gold(){
-  name = "Gold";
+  set_name("gold");
+  set_percept("You see a glimmer nearby.");
 }
 /*******************************************************************
-Function: gold::percept()
-Description: prints out the hint that the gold horde is in an adjacent room
-
+Function:
+Description:
 ********************************************************************/
-void gold::percept(){
- cout << "You see a glimmer nearby." << endl;
+int gold::encounter(){
+  cout << "You have found the horde of gold!\n";
+  cout << "You have added the horde of gold to your inventory.\n";
+  return 2;
+}
+
+
+/*******************************************************************
+
+gold::gold(){
+  set_name("Gold");
+  set_percept("You see a glimmer nearby.");
 }
 /*******************************************************************
 Function: gold::encounter()
 Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
-********************************************************************/
-void gold::encounter(){
 
+int gold::encounter(){
+  cout << "You have found the horde of gold!\n";
+  cout << "You have added the horde of gold to your inventory.\n";
+  return 2;
 }
-/*******************************************************************
-Function: contains
-Description: Returns the type of event
-*******************************************************************/
+********************************************************************/

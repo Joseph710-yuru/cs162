@@ -14,7 +14,8 @@ class wumpus : public event {
     wumpus();
     bool get_alive();
     void set_alive(bool);
-    void encounter();
+    string get_percept();
+    int encounter();
     void kill();
     bool wake_up();
 };

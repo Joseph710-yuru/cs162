@@ -9,7 +9,8 @@ using namespace std;
 
 class bats : public event {
   public:
-    void encounter();
+    bats();
+    int encounter();
 };
 
 #endif

@@ -10,11 +10,18 @@ using namespace std;
 class room {
   private:
     event e;
+    bool arrow, show;
   public:
     room();
+    bool get_show();
+    void set_show(bool);
     event get_event();
     void set_event(event &);
-    string contain();
+    bool get_arrow();
+    void set_arrow(bool);
+    void get_percept();
+    string get_name();
+    bool kill();
 };
 
 #endif

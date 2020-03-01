@@ -14,25 +14,15 @@ Function:
 Description:
 *******************************************************************/
 pit::pit(){
-  name = "Pit";
-  percept = "You feel a breeze.";
-}
-void set_percept(string p){
-  percept = p;
-}
-
-/*******************************************************************
-Function: pit::percept()
-Description: prints out the hint that a pit is in an adjacent room
-********************************************************************/
-void pit::get_percept(){
- cout percept;
+  set_name("Pit");
+  set_percept("You feel a breeze.");
 }
 /*******************************************************************
 Function: pit::encounter()
 Description:
 
 ********************************************************************/
-void pit::encounter(){
-
+int pit::encounter(){
+  cout << "You fall into a large pit and die.\n";
+  return 3;
 }

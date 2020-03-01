@@ -5,22 +5,26 @@ description: implementation for wumpus class
 #include "wumpus.h"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 /*******************************************************************
-Function: wumpus::percept()
-Description: prints out the hint that the wumpus is in an adjacent room
+Function:
+Description:
 ********************************************************************/
-void wumpus::percept(){
- cout << "You smell a terrible stench." << endl;
+wumpus::wumpus(){
+ set_name("wumpus");
+ set_percept("You smell a great stench.");
+ alive = true;
 }
 /*******************************************************************
 Function: wumpus::encounter()
 Description:
 ********************************************************************/
-void wumpus::encounter(){
+int wumpus::encounter(){
  cout << "The Wumpus wakes up and eats you!\nGame over.\n";
+ return 3;
 }
 /*******************************************************************
 Function: wumpus::kill()
@@ -35,11 +39,4 @@ Description:
 ********************************************************************/
 bool wumpus::wake_up(){
   return true;
-}
-/*******************************************************************
-Function: contain
-Description: Returns the type of event
-*******************************************************************/
-string wumpus::contain(){
-  return "wumpus";
 }

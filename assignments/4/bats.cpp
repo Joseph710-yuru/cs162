@@ -5,27 +5,23 @@ description: implementation for bats class
 #include "bats.h"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
-
 /*******************************************************************
-Function: bats::percept()
-Description: prints out the hint that bats are in an adjacent room
-********************************************************************/
-void bats::percept(){
-  cout << "You hear wings flapping.\n";
+Function:
+Description:
+*******************************************************************/
+bats::bats(){
+  set_name("bats");
+  set_percept("You hear wings flapping.");
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
-void bats::encounter(){
-
-}
-/*******************************************************************
-Function: contain
-Description: Returns the type of event
-*******************************************************************/
-string bats::contain(){
-  return "bats";
+int bats::encounter(){
+  cout << "You enter a room filled with bats.\n";
+  cout << "The bats carry you away.\n";
+  return 1;
 }

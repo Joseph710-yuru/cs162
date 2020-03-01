@@ -11,9 +11,11 @@ class event {
     string percept;
   public:
     event();
-    virtual void encounter();
+    virtual int encounter();
+    string get_name();
+    void set_name(string);
     string get_percept();
-    void set_percept();
+    void set_percept(string);
     bool wake_up();
 };
 
