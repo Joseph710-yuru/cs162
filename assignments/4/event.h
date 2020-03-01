@@ -7,11 +7,13 @@ using namespace std;
 
 class event {
   private:
-
+    string name;
+    string percept;
   public:
-    virtual void percept();
+    event();
     virtual void encounter();
-    string contain();
+    string get_percept();
+    void set_percept();
     bool wake_up();
 };
 

@@ -10,16 +10,17 @@ description: implementation for event type
 using namespace std;
 
 /*******************************************************************
+Function: event
+Description: Default constructor for event type
+*******************************************************************/
+event::event(){
+  name = "Undefined Event";
+  percept = "No Percept";
+}
+/*******************************************************************
 Function: event::wake_up()
 Description: defaults to false for all events unless otherwise defined
 ********************************************************************/
 bool event::wake_up(){
   return false;
-}
-/*******************************************************************
-Function: contain
-Description: Returns the type of event
-*******************************************************************/
-string event::contain(){
-  return "empty";
 }

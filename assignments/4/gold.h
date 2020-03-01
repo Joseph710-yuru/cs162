@@ -8,12 +8,10 @@
 using namespace std;
 
 class gold : public event {
-  private:
-
   public:
-    void percept();
+    gold();
     void encounter();
-    string contain();
+
 };
 
 #endif

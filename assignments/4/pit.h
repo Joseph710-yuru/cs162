@@ -8,12 +8,9 @@
 using namespace std;
 
 class pit : public event {
-  private:
-
   public:
-    void percept();
+    pit();
     void encounter();
-    string contain();
 };
 
 #endif

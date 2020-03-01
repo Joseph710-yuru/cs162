@@ -9,13 +9,14 @@ using namespace std;
 
 class wumpus : public event {
   private:
-    int alive;
+    bool alive;
   public:
-    void percept();
+    wumpus();
+    bool get_alive();
+    void set_alive(bool);
     void encounter();
     void kill();
     bool wake_up();
-    string contain();
 };
 
 #endif
