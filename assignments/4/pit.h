@@ -3,6 +3,8 @@
 
 #include "event.h"
 
+#include <string>
+
 using namespace std;
 
 class pit : public event {
@@ -11,6 +13,7 @@ class pit : public event {
   public:
     void percept();
     void encounter();
+    string contain();
 };
 
 #endif

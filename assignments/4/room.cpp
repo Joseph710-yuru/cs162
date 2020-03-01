@@ -1,22 +1,35 @@
-/*************************************
+/********************************************************************
 file: room.cpp
 description: implementation for room class
-*************************************/
+********************************************************************/
+#include "room.h"
+#include "event.h"
 
-/*************************************
-room() - default constructor for room
-*************************************/
+/*******************************************************************
+Function: default constructor for event type
+Description: sets event to null
+********************************************************************/
 room::room(){
-  x = -1;
-  y = -1;
-  event = NULL;
+
 }
-/*************************************
-room(int, int) - same as default constructor,
-                except specifies room location
-*************************************/
-room::room(int rx, int ry){
-  x = rx;
-  y = ry;
-  event = NULL;
+/*******************************************************************
+Function: accessor for private member e
+Description: returns the event e
+********************************************************************/
+event room::get_event(){
+  return e;
+}
+/*******************************************************************
+Function: set_event
+Description: mutator for private member e
+********************************************************************/
+void room::set_event(event &ve){
+  e = ve;
+}
+/*******************************************************************
+Function: contains
+Description: Returns the type of event
+*******************************************************************/
+string room::contain(){
+  return e.contain() ;
 }

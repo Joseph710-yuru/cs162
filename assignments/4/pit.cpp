@@ -11,9 +11,6 @@ using namespace std;
 /*******************************************************************
 Function: pit::percept()
 Description: prints out the hint that a pit is in an adjacent room
-Parameters: n/a
-Pre-Conditions:
-Post-Conditions: print "You feel a breeze."
 ********************************************************************/
 void pit::percept(){
  cout << "You feel a breeze." << endl;
@@ -21,10 +18,15 @@ void pit::percept(){
 /*******************************************************************
 Function: pit::encounter()
 Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
+
 ********************************************************************/
 void pit::encounter(){
 
+}
+/*******************************************************************
+Function: contains
+Description: Returns the type of event
+*******************************************************************/
+string pit::contain(){
+  return "pit";
 }

@@ -11,9 +11,6 @@ using namespace std;
 /*******************************************************************
 Function: bats::percept()
 Description: prints out the hint that bats are in an adjacent room
-Parameters: n/a
-Pre-Conditions:
-Post-Conditions: print "You hear wings flapping."
 ********************************************************************/
 void bats::percept(){
   cout << "You hear wings flapping.\n";
@@ -21,10 +18,14 @@ void bats::percept(){
 /*******************************************************************
 Function:
 Description:
-Parameters:
-Pre-Conditions:
-Post-Conditions:
 ********************************************************************/
 void bats::encounter(){
 
+}
+/*******************************************************************
+Function: contain
+Description: Returns the type of event
+*******************************************************************/
+string bats::contain(){
+  return "bats";
 }

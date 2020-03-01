@@ -28,3 +28,10 @@ Post-Conditions:
 void gold::encounter(){
 
 }
+/*******************************************************************
+Function: contains
+Description: Returns the type of event
+*******************************************************************/
+string gold::contain(){
+  return "gold";
+}

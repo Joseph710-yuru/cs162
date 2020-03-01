@@ -3,6 +3,8 @@
 
 #include "event.h"
 
+#include <string>
+
 using namespace std;
 
 class wumpus : public event {
@@ -13,6 +15,7 @@ class wumpus : public event {
     void encounter();
     void kill();
     bool wake_up();
+    string contain();
 };
 
 #endif

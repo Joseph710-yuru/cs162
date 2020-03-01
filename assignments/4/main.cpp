@@ -11,10 +11,14 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 int main() {
+  srand(time(0));
+  
   vector<vector<int> > vect{  {1, 2, 3},
                               {4, 5, 6},
                               {7, 8, 9} };
