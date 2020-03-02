@@ -9,14 +9,17 @@ class event {
   private:
     string name;
     string percept;
+    int ent;
   public:
     event();
-    virtual int encounter();
+    void set_ent(int);
+    int get_ent();
     string get_name();
     void set_name(string);
     string get_percept();
     void set_percept(string);
-    bool wake_up();
+    char get_symbol();
+    virtual void encounter();
 };
 
 #endif

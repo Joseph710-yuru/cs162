@@ -16,13 +16,12 @@ Description:
 pit::pit(){
   set_name("Pit");
   set_percept("You feel a breeze.");
+  set_ent(3);
 }
 /*******************************************************************
 Function: pit::encounter()
 Description:
-
 ********************************************************************/
-int pit::encounter(){
+void pit::encounter(){
   cout << "You fall into a large pit and die.\n";
-  return 3;
 }

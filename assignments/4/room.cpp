@@ -18,6 +18,13 @@ room::room(){
   show = false;
 }
 /*******************************************************************
+Function:
+Description:
+********************************************************************/
+char room::get_symbol(){
+  return e.get_symbol();
+}
+/*******************************************************************
 Function: accessor for private member e
 Description: returns the event e
 ********************************************************************/
@@ -43,7 +50,7 @@ Function:
 Description:
 ********************************************************************/
 void room::get_percept(){
-  cout << e.get_percept() << endl;
+  if (e.get_percept() != "undefined") cout << e.get_percept() << endl;
 }
 /*******************************************************************
 Function:
@@ -79,7 +86,12 @@ Description:
 ********************************************************************/
 bool room::kill(){
   if (e.get_name() == "wumpus") {
-    set_show(false);
+    event ev;
+    set_event(ev);
     return true;
   } else return false;
+}
+
+int room::get_ent(){
+  return e.get_ent();
 }

@@ -16,20 +16,28 @@ Description: Default constructor for event type
 event::event(){
   name = "undefined";
   percept = "undefined";
-}
-/*******************************************************************
-Function: event::wake_up()
-Description: defaults to false for all events unless otherwise defined
-********************************************************************/
-bool event::wake_up(){
-  return false;
+  ent = -1;
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
-int event::encounter(){
-  return -1;
+void event::set_ent(int e){
+  ent = e;
+}
+/*******************************************************************
+Function:
+Description:
+********************************************************************/
+int event::get_ent(){
+  return ent;
+}
+/*******************************************************************
+Function:
+Description:
+********************************************************************/
+void event::encounter(){
+
 }
 /*******************************************************************
 Function:
@@ -63,3 +71,8 @@ void event::set_percept(string p){
 Function:
 Description:
 ********************************************************************/
+char event::get_symbol(){
+  char temp = ' ';
+  if (name[0] != 'u') temp = name[0];
+  return temp;
+}

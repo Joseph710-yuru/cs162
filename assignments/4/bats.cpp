@@ -15,13 +15,13 @@ Description:
 bats::bats(){
   set_name("bats");
   set_percept("You hear wings flapping.");
+  set_ent(1);
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
-int bats::encounter(){
-  cout << "You enter a room filled with bats.\n";
+void bats::encounter(){
+  cout << "You enter a room filled with spooky scary bats.\n";
   cout << "The bats carry you away.\n";
-  return 1;
 }

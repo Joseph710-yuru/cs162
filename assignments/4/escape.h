@@ -1,5 +1,5 @@
-#ifndef BATS_H
-#define BATS_H
+#ifndef ESCAPE_H
+#define ESCAPE_H
 
 #include "event.h"
 
@@ -7,9 +7,9 @@
 
 using namespace std;
 
-class bats : public event {
+class escape : public event {
   public:
-    bats();
+    escape();
     void encounter();
 };
 

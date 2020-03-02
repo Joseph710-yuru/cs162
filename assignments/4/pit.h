@@ -10,7 +10,7 @@ using namespace std;
 class pit : public event {
   public:
     pit();
-    int encounter();
+    void encounter();
 };
 
 #endif

@@ -11,7 +11,7 @@ using namespace std;
 class game {
   private:
     int player_x, player_y, rooms, arrows;
-    bool alive, horde, debug, escape;
+    bool alive, horde, debug, flee, walive;
     vector<vector<room>> r;
   public:
     game();
@@ -35,7 +35,7 @@ class game {
     void move_east();
     void move_west();
     //arrow stuff
-    void arrow_direction(char);
+    void arrow_direction();
     void arrow_north();
     void arrow_south();
     void arrow_east();
@@ -52,12 +52,15 @@ class game {
     void post_bats();
     void post_gold();
     void post_wumpit();
+    void post_escape();
     //other
     void print_map();
     void set_starting_location();
     void print_percepts();
-    bool check_win();
-
+    void game_loop();
+    void clear_terminal();
+    void wumpywakey(int, int);
+    void get_char(char &);
 };
 
 #endif

@@ -9,6 +9,7 @@ description: implementation for game class
 #include "gold.h"
 #include "pit.h"
 #include "wumpus.h"
+#include "escape.h"
 
 #include <iostream>
 #include <vector>
@@ -26,22 +27,28 @@ game::game(){
   rooms = 4;
   arrows = 3;
 
-  debug = false;
+  debug = true;
   alive = true;
   horde = false;
-  escape = false;
+  flee = false;
+  walive = true;
 
   r.resize(rooms, vector<room>(rooms));
   assign_events();
-  //set_starting_location();
+  set_starting_location();
+  if (debug==true) {
+    for (int i=0; i < rooms-1;++i)
+      for (int j=0; j < rooms-1;++j)
+        r[i][j].set_show(true);
+  }
 }
 /*******************************************************************
 Function: game
 Parameters: int ro, int de
-Description: builds a game with a custom size and/or allows the
+Description: builds a game with a custom size and allows the
              use of debug mode
 ********************************************************************/
-game::game(int ro=4, bool de=false){
+game::game(int ro, bool de=false){
   player_y = 0;
   rooms = ro;
   arrows = 3;
@@ -49,7 +56,8 @@ game::game(int ro=4, bool de=false){
   debug = de;
   alive = true;
   horde = false;
-  escape = false;
+  flee = false;
+  walive = true;
 
   r.resize(rooms, vector<room>(rooms));
   assign_events();
@@ -142,17 +150,32 @@ Function:
 Description:
 ********************************************************************/
 void game::player_move(){
-
+  int repeat=1;
+  char a;
+  cout << "Your move: ";
+  get_char(a);
+  while (repeat==1){
+    if (a=='w'||a=='a'||a=='s'||a=='d'||a==' '){
+      if (a =='w') move_north();
+      if (a =='a') move_west();
+      if (a =='s') move_south();
+      if (a =='d') move_east();
+      if (a == ' ') arrow_direction();
+      repeat = 0;
+    } else {
+      cout << "Your move: ";
+      get_char(a);
+    }
+  }
 }
 /*******************************************************************
 Function: move_north()
 Description: move player one room north.
 ********************************************************************/
 void game::move_north(){
-  if (player_y < rooms) player_y += 1;
+  if (player_x > 0) player_x -= 1;
   else {
     cout << "You cannot move farther north.\n";
-    player_move();
   }
 }
 /*******************************************************************
@@ -160,10 +183,9 @@ Function: move_south()
 Description: move player one room south
 ********************************************************************/
 void game::move_south(){
-  if (player_y > 0) player_y -= 1;
+  if (player_x < rooms-1) player_x += 1;
   else {
     cout << "You cannot move farther south.\n";
-    player_move();
   }
 }
 /*******************************************************************
@@ -171,10 +193,9 @@ Function: move_east()
 Description: moves the player one room east
 ********************************************************************/
 void game::move_east(){
-  if (player_y < rooms) player_y += 1;
+  if (player_y < rooms-1) player_y += 1;
   else {
     cout << "You cannot move farther east.\n";
-    player_move();
   }
 }
 /*******************************************************************
@@ -185,7 +206,6 @@ void game::move_west(){
   if (player_y > 0) player_y -= 1;
   else {
     cout << "You cannot move farther west.\n";
-    player_move();
   }
 }
 /*******************************************************************
@@ -203,15 +223,15 @@ Function: assign_wumpus
 Description: places a wumpus in specified room
 ********************************************************************/
 void game::assign_wumpus(){
-  int x=rand() % rooms-1, y=rand() % rooms-1, num=0;
+  int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
   wumpus w;
   while (num < 1){
-    if (r[x][y].get_name() == "undefined") {
-      r[x][y].set_event(w);
+    if (r[y][x].get_name() == "undefined") {
+      r[y][x].set_event(w);
       num = 1;
     } else {
-      x = rand() % rooms-1;
-      y = rand() % rooms-1;
+      x = rand() % (rooms-1);
+      y = rand() % (rooms-1);
     }
   }
 }
@@ -220,15 +240,15 @@ Function: assign_pit
 Description: places a pit in the specified room
 ********************************************************************/
 void game::assign_pit(){
-  int x=rand() % rooms-1, y=rand() % rooms-1, num=0;
+  int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
   pit p;
   while (num < 1){
-    if (r[x][y].get_name() == "undefined") {
-      r[x][y].set_event(p);
+    if (r[y][x].get_symbol() == ' ') {
+      r[y][x].set_event(p);
       num = 1;
     } else {
-      x = rand() % rooms-1;
-      y = rand() % rooms-1;
+      x = rand() % (rooms-1);
+      y = rand() % (rooms-1);
     }
   }
 }
@@ -238,15 +258,15 @@ Description: places gold in the assigned room
 ********************************************************************/
 void game::assign_gold(){
   gold g;
-  int x=rand() % rooms-1, y=rand() % rooms-1, num=0;
+  int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
 
   while (num < 1){
-    if (r[x][y].get_name() == "undefined") {
-      r[x][y].set_event(g);
+    if (r[y][x].get_name() == "undefined") {
+      r[y][x].set_event(g);
       num = 1;
     } else {
-      x = rand() % rooms-1;
-      y = rand() % rooms-1;
+      x = rand() % (rooms-1);
+      y = rand() % (rooms-1);
     }
   }
 }
@@ -255,16 +275,16 @@ Function: assign_bats
 Description: places bats in the specified room
 ********************************************************************/
 void game::assign_bats(){
-  int x=rand() % rooms-1, y=rand() % rooms-1, num=0;
+  int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
   bats b;
 
   while (num < 2){
-    if (r[x][y].get_name() == "undefined") {
-      r[x][y].set_event(b);
+    if (r[y][x].get_name() == "undefined") {
+      r[y][x].set_event(b);
       num++;
     } else {
-      x = rand() % rooms-1;
-      y = rand() % rooms-1;
+      x = rand() % (rooms-1);
+      y = rand() % (rooms-1);
     }
   }
 }
@@ -281,6 +301,17 @@ void game::post_event(int event){
             break;
     case 3: post_wumpit();
             break;
+    case 4: post_escape();
+            break;
+  }
+}
+/*******************************************************************
+Function: post_event
+Description: Handles which event effect occurs
+********************************************************************/
+void game::post_escape(){
+  if (alive==true && horde == true && walive==false){
+    flee=true;
   }
 }
 /*******************************************************************
@@ -288,10 +319,13 @@ Function: post_bats
 Description: moves player to random room, runs room event and prints percepts
 ********************************************************************/
 void game::post_bats(){
-  player_x = rand() % rooms-1;
-  player_y = rand() % rooms-1;
+  event temp = r[player_y][player_x].get_event();
+  temp.encounter();
+  player_x = rand() % (rooms-1);
+  player_y = rand() % (rooms-1);
+  clear_terminal();
   print_map();
-  r[player_x][player_y].get_event();
+  post_event(r[player_y][player_x].get_ent());
 }
 /*******************************************************************
 Function: post_gold
@@ -312,32 +346,81 @@ void game::post_wumpit(){
 Function:
 Description:
 ********************************************************************/
-void game::arrow_direction(char d){
-  if (d=='w') arrow_north();
-  if (d=='a') arrow_west();
-  if (d=='s') arrow_south();
-  if (d=='d') arrow_east();
+void game::arrow_direction(){
+  int repeat = 1;
+  char d;
+  while (repeat==1){
+    cout << "direction to fire: ";
+    get_char(d);
+
+    if (d=='w') {
+      arrow_north();
+      repeat = 0;
+    } else if (d=='a') {
+      arrow_west();
+      repeat = 0;
+    } else if (d=='s') {
+      arrow_south();
+      repeat = 0;
+    } else if (d=='d') {
+      arrow_east();
+      repeat = 0;
+    }  else cout << "Bad direction, try again\n";
+  }
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
 void game::arrow_north(){
-
+  for (int i=0; i < rooms; ++i){
+    if (player_y-i >= 0){
+      r[player_y-i][player_x].set_show(true);
+      if (r[player_y-i][player_x].kill() == true) {
+        break;
+      }
+    } else {
+      r[player_y-i+1][player_x].set_arrow(true);
+      arrow_noise(player_x-i+1,player_y);
+      break;
+    }
+  }
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
 void game::arrow_south(){
-
+  for (int i=0; i < rooms; ++i){
+    if (player_y+i >= 0){
+      r[player_y+i][player_x].set_show(true);
+      if (r[player_y+i][player_x].kill() == true) {
+        break;
+      }
+    } else {
+      r[player_y-i-1][player_x].set_arrow(true);
+      arrow_noise(player_y-i+1,player_x);
+      break;
+    }
+  }
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
 void game::arrow_east(){
-
+  for (int i=0; i < rooms; ++i){
+    if (player_x+i >= 0){
+      r[player_y][player_x+i].set_show(true);
+      if (r[player_y][player_x+i].kill() == true) {
+        break;
+      }
+    } else {
+      r[player_y][player_x+i-1].set_arrow(true);
+      arrow_noise(player_y,player_x+i-1);
+      break;
+    }
+  }
 }
 /*******************************************************************
 Function:
@@ -346,13 +429,12 @@ Description:
 void game::arrow_west(){
   for (int i=0; i < rooms; ++i){
     if (player_x-i >= 0){
-      r[player_x-i][player_y].set_show(true);
+      r[player_y][player_x-i].set_show(true);
       if (r[player_x-i][player_y].kill() == true) {
-        escape = true;
         break;
       }
     } else {
-      r[player_x-i+1][player_y].set_arrow(true);
+      r[player_y][player_x-i+1].set_arrow(true);
       arrow_noise(player_x-i+1,player_y);
       break;
     }
@@ -363,40 +445,58 @@ Function:
 Description:
 ********************************************************************/
 void game::arrow_noise(int x, int y){
-
+  if (x+1<rooms) if (r[x+1][y].get_name()=="wumpus") wumpywakey(x+1, y);
+  if (x-1>=0) if (r[x-1][y].get_name()=="wumpus") wumpywakey(x-1, y);
+  if (y+1<rooms) if (r[x+1][y].get_name()=="wumpus") wumpywakey(x, y+1);
+  if (y-1>=0) if (r[x+1][y].get_name()=="wumpus") wumpywakey(x, y-1);
 }
 /*******************************************************************
 Function: print_map()
 Description: prints the game map out
 ********************************************************************/
 void game::print_map(){
-  for (int i = 0; i < rooms; ++i){
-    for (int j = 0; j < rooms; ++j) cout << "+---";
-    cout << "+" << endl;
-    for (int x=0; x < rooms-1; ++x){
-      for (int j=0;j<rooms;++j) {
-        cout << "|  ";
-        if (player_x==i && player_y == j) cout << "*";
-        else cout << " ";
-      }
-      cout << "|" << endl;
+  for (int i=0; i < rooms; ++i){
+    for (int j=0; j < rooms; ++j) cout << "*---";
+    cout << "*\n";
+    for (int j=0; j < rooms; ++j) {
+      cout << "| ";
+      if (r[j][i].get_arrow()==true) cout << '^';
+      else cout << " ";
+      cout << " ";
     }
+    cout << "|\n";
+    for (int j=0; j < rooms; ++j) {
+      cout << "| ";
+      if (r[j][i].get_show()==true) cout << r[j][i].get_symbol();
+      else cout << " ";
+      cout << " ";
+    }
+    cout << "|\n";
+    for (int j=0; j < rooms; ++j){
+      cout << "| ";
+      if (j == player_y && i == player_x) cout << "*";
+      else cout << " ";
+      cout << " ";
+    }
+    cout << "|\n";
   }
-  for (int j = 0; j < rooms; ++j) cout << "+---";
-  cout << "+" << endl;
+  for (int j=0; j < rooms; ++j) cout << "*---";
+  cout << "*\n";
 }
 /*******************************************************************
 Function:
 Description:
 ********************************************************************/
 void game::set_starting_location(){
-  int x=rand() % rooms-1, repeat=0;
+  int x=rand() % (rooms-1), repeat=0;
+  escape e;
   while (repeat==0){
-    if (r[x][player_y].get_name() == "undefined") {
+    if (r[player_y][x].get_name() == "undefined") {
       player_x = x;
       repeat = 1;
+      r[player_y][player_x].set_event(e);
     } else {
-      x=rand() % rooms-1;
+      x=rand() % rooms;
     }
   }
 
@@ -406,16 +506,68 @@ Function:
 Description:
 ********************************************************************/
 void game::print_percepts(){
-  if (player_x < rooms) r[player_x+1][player_y].get_percept();
-  if (player_x > 0) r[player_x-1][player_y].get_percept();
-  if (player_y < rooms) r[player_x][player_y+1].get_percept();
-  if (player_y > 0) r[player_x][player_y-1].get_percept();
+  if (player_y < rooms-1) r[player_y+1][player_x].get_percept();
+  if (player_y > 0) r[player_y-1][player_x].get_percept();
+  if (player_x < rooms-1) r[player_y][player_x+1].get_percept();
+  if (player_x > 0) r[player_y][player_x-1].get_percept();
 }
 /*******************************************************************
-Function:
-Description:
+Function: game_loop
+Description: function that loops through user turns, and checks
+             for win/loss and calls end_game if either occurs.
 ********************************************************************/
-bool game::check_win(){
-  if (alive==true, horde==true, escape==true) return true;
-  else return false;
+void game::game_loop(){
+  event temp;
+  while(flee==false && alive==true){
+    clear_terminal();
+    print_map();
+    post_event(r[player_y][player_x].get_ent());
+    if (flee==false && alive==true){
+      print_percepts();
+      player_move();
+    }
+  }
+}
+/*******************************************************************
+Function: clear_terminal
+Description: clears the terminal
+********************************************************************/
+void game::clear_terminal(){
+  cout << "\033[2J";
+}
+/*******************************************************************
+Function: wumpywakey
+Description: wumpus wakes up and moves rooms
+********************************************************************/
+void game::wumpywakey(int x, int y){
+  event e;
+  wumpus w;
+  int new_x = rand() % (rooms-1), new_y = rand() % (rooms-1);
+
+  r[x][y].set_event(e);
+  if (new_x != player_x && new_y != player_y)
+    if (new_x != x && new_y != y)
+      r[x][y].set_event(w);
+}
+/*******************************************************************
+Function: get_char
+Description: gets a char from the user, checks if it's a char, loops
+             until it finally gets the char it so desires
+********************************************************************/
+void game::get_char(char &a){
+  int repeat = 1;
+  char temp[1];
+  cin.getline(temp,1);
+
+  while (repeat == 1) {
+    if (cin.fail() == true) {
+      cin.clear();
+      cin.ignore(1000000000,'\n');
+      cout << "\terror: Non-character input\n\tInput an character: ";
+      cin.getline(temp,1);
+    } else {
+      a = temp[0];
+      repeat = 0;
+    }
+  }
 }

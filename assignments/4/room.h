@@ -13,6 +13,7 @@ class room {
     bool arrow, show;
   public:
     room();
+    char get_symbol();
     bool get_show();
     void set_show(bool);
     event get_event();
@@ -21,6 +22,7 @@ class room {
     void set_arrow(bool);
     void get_percept();
     string get_name();
+    int get_ent();
     bool kill();
 };
 

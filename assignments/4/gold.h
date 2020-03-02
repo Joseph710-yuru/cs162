@@ -10,7 +10,7 @@ using namespace std;
 class gold : public event {
   public:
     gold();
-    int encounter();
+    void encounter();
 };
 
 #endif
