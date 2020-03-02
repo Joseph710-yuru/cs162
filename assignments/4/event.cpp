@@ -37,7 +37,7 @@ Function:
 Description:
 ********************************************************************/
 void event::encounter(){
-
+  cout << "You enter an empty room.\n";
 }
 /*******************************************************************
 Function:
@@ -73,6 +73,7 @@ Description:
 ********************************************************************/
 char event::get_symbol(){
   char temp = ' ';
-  if (name[0] != 'u') temp = name[0];
+  string n = get_name();
+  if (n[0] != 'u') temp = n[0];
   return temp;
 }

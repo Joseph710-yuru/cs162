@@ -23,7 +23,6 @@ Description: default constructor for game class
 ********************************************************************/
 game::game(){
   player_y=0;
-  player_x=0;
   rooms = 4;
   arrows = 3;
 
@@ -224,11 +223,10 @@ Description: places a wumpus in specified room
 ********************************************************************/
 void game::assign_wumpus(){
   int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
-  wumpus w;
   while (num < 1){
-    if (r[y][x].get_name() == "undefined") {
-      r[y][x].set_event(w);
-      num = 1;
+    if (r[y][x].get_symbol() == ' ') {
+      r[y][x].assign_wumpus();
+      num = 10;
     } else {
       x = rand() % (rooms-1);
       y = rand() % (rooms-1);
@@ -241,10 +239,9 @@ Description: places a pit in the specified room
 ********************************************************************/
 void game::assign_pit(){
   int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
-  pit p;
   while (num < 1){
     if (r[y][x].get_symbol() == ' ') {
-      r[y][x].set_event(p);
+      r[y][x].assign_pit();
       num = 1;
     } else {
       x = rand() % (rooms-1);
@@ -257,12 +254,10 @@ Function: assign_gold
 Description: places gold in the assigned room
 ********************************************************************/
 void game::assign_gold(){
-  gold g;
   int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
-
   while (num < 1){
     if (r[y][x].get_name() == "undefined") {
-      r[y][x].set_event(g);
+      r[y][x].assign_gold();
       num = 1;
     } else {
       x = rand() % (rooms-1);
@@ -276,11 +271,9 @@ Description: places bats in the specified room
 ********************************************************************/
 void game::assign_bats(){
   int x=rand() % (rooms-1), y=rand() % (rooms-1), num=0;
-  bats b;
-
   while (num < 2){
     if (r[y][x].get_name() == "undefined") {
-      r[y][x].set_event(b);
+      r[y][x].assign_bats();
       num++;
     } else {
       x = rand() % (rooms-1);
@@ -334,6 +327,7 @@ Description: updates gold private member to reflect the player
 ********************************************************************/
 void game::post_gold(){
   horde = true;
+  r[player_y][player_x].assign_empty();
 }
 /*******************************************************************
 Function: post_wumpus
@@ -489,17 +483,15 @@ Description:
 ********************************************************************/
 void game::set_starting_location(){
   int x=rand() % (rooms-1), repeat=0;
-  escape e;
   while (repeat==0){
     if (r[player_y][x].get_name() == "undefined") {
       player_x = x;
       repeat = 1;
-      r[player_y][player_x].set_event(e);
+      r[player_y][player_x].assign_escape();
     } else {
       x=rand() % rooms;
     }
   }
-
 }
 /*******************************************************************
 Function:
@@ -540,14 +532,12 @@ Function: wumpywakey
 Description: wumpus wakes up and moves rooms
 ********************************************************************/
 void game::wumpywakey(int x, int y){
-  event e;
-  wumpus w;
   int new_x = rand() % (rooms-1), new_y = rand() % (rooms-1);
 
-  r[x][y].set_event(e);
+  r[x][y].assign_empty();
   if (new_x != player_x && new_y != player_y)
     if (new_x != x && new_y != y)
-      r[x][y].set_event(w);
+      r[x][y].assign_wumpus();
 }
 /*******************************************************************
 Function: get_char
@@ -556,17 +546,16 @@ Description: gets a char from the user, checks if it's a char, loops
 ********************************************************************/
 void game::get_char(char &a){
   int repeat = 1;
-  char temp[1];
-  cin.getline(temp,1);
+
+  cin >> a;
 
   while (repeat == 1) {
     if (cin.fail() == true) {
       cin.clear();
       cin.ignore(1000000000,'\n');
       cout << "\terror: Non-character input\n\tInput an character: ";
-      cin.getline(temp,1);
+      cin >> a;
     } else {
-      a = temp[0];
       repeat = 0;
     }
   }

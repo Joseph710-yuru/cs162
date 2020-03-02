@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -19,15 +20,17 @@ class derived : public base {
 };
 
 int main(){
-  base *array [2];
+  vector<vector<base*>> array;
+  array.resize(2, vector<base*>(2));
+
   base one;
   derived two;
 
-  array[0] = &one;
-  array[1] = &two;
+  array[0][0] = &one;
+  array[1][0] = &two;
 
-  array[0]->print_name();
-  array[1]->print_name();
+  array[0][0]->print_name();
+  array[1][0]->print_name();
   cout << endl;
 
   return 0;
