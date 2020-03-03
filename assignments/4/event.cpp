@@ -1,79 +1,30 @@
-/*******************************************************************
-file: event.cpp
-description: implementation for event type
-*******************************************************************/
 #include "event.h"
 
-#include <string>
 #include <iostream>
 
 using namespace std;
 
-/*******************************************************************
-Function: event
-Description: Default constructor for event type
-*******************************************************************/
 event::event(){
-  name = "undefined";
-  percept = "undefined";
-  ent = -1;
+  percept = " ";
+  symbol = ' ';
 }
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-void event::set_ent(int e){
-  ent = e;
+
+int event::encounter(){
+  return 0;
 }
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-int event::get_ent(){
-  return ent;
-}
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-void event::encounter(){
-  cout << "You enter an empty room.\n";
-}
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-void event::set_name(string n){
-  name = n;
-}
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-string event::get_name(){
-  return name;
-}
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-string event::get_percept(){
-  return percept;
-}
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
+
 void event::set_percept(string p){
   percept = p;
 }
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
+
+void event::set_symbol(char s){
+  symbol = s;
+}
+
+string event::get_percept(){
+  return percept;
+}
+
 char event::get_symbol(){
-  char temp = ' ';
-  string n = get_name();
-  if (n[0] != 'u') temp = n[0];
-  return temp;
+  return symbol;
 }

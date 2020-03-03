@@ -13,7 +13,7 @@ class event {
     char symbol;
   public:
     event();
-    virtual int encounter();
+    virtual int encounter() = 0;
     //accessors and mutators
     void set_percept(string);
     void set_symbol(char);

@@ -10,7 +10,7 @@ using namespace std;
 class bats : public event {
   public:
     bats();
-    void encounter();
+    int encounter();
 };
 
 #endif

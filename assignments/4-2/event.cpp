@@ -5,12 +5,11 @@
 using namespace std;
 
 event::event(){
-  percept = "You enter an empty room";
+  percept = " ";
   symbol = ' ';
 }
 
 int event::encounter(){
-  cout << get_percept() << endl;
   return 0;
 }
 

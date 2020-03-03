@@ -1,5 +1,5 @@
-#ifndef ESCAPE_H
-#define ESCAPE_H
+#ifndef EMPTY_H
+#define EMPTY_H
 
 #include "event.h"
 
@@ -7,9 +7,9 @@
 
 using namespace std;
 
-class escape : public event {
+class empty : public event {
   public:
-    escape();
+    empty();
     int encounter();
 };
 

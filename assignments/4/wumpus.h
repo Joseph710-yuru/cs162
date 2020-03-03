@@ -10,7 +10,7 @@ using namespace std;
 class wumpus : public event {
   public:
     wumpus();
-    bool encounter();
+    int encounter();
 };
 
 #endif

@@ -1,25 +1,14 @@
-/*******************************************************************
-file: escape.cpp
-description: implementation for escape class
-*******************************************************************/
 #include "escape.h"
 
 #include <iostream>
-#include <string>
 
 using namespace std;
-/*******************************************************************
-Function:
-Description:
-*******************************************************************/
+
 escape::escape(){
-  set_name("escape");
-  set_ent(4);
+  set_symbol('e');
 }
-/*******************************************************************
-Function:
-Description:
-********************************************************************/
-void escape::encounter(){
-  cout << "You killed the Wumpus and escaped with the horde of gold!\n";
+
+int escape::encounter(){
+  cout << "You enter the room with the escape rope.\n";
+  return 5;
 }

@@ -1,25 +1,24 @@
 #ifndef EVENT_H
 #define EVENT_H
 
+#include "event.h"
+
 #include <string>
 
 using namespace std;
 
 class event {
   private:
-    string name;
     string percept;
-    int ent;
+    char symbol;
   public:
     event();
-    void set_ent(int);
-    int get_ent();
-    string get_name();
-    void set_name(string);
-    string get_percept();
+    virtual int encounter() = 0;
+    //accessors and mutators
     void set_percept(string);
+    void set_symbol(char);
+    string get_percept();
     char get_symbol();
-    void encounter();
 };
 
 #endif
