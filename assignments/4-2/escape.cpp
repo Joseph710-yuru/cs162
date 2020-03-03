@@ -9,6 +9,6 @@ escape::escape(){
 }
 
 int escape::encounter(){
-  cout << "You enter the room with the escape rope.\n";
+  cout << "You climb the escape rope.\n";
   return 5;
 }

@@ -5,7 +5,6 @@
 using namespace std;
 
 event::event(){
-  percept = " ";
   symbol = ' ';
 }
 

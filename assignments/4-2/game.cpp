@@ -29,26 +29,26 @@ game::game(){
 
   debug = true;
   alive = true;
-  has_gold = true;
+  has_gold = false;
   can_flee = false;
   w_alive = true;
 
-  r->resize(n_rooms, vector<room>(n_rooms));
+  r.resize(n_rooms, vector<room>(n_rooms));
    vector<vector<room>>::iterator row;
    vector<room>::iterator col;
-    for (row=r->begin(); row != r->end();++row){
+    for (row=r.begin(); row != r.end();++row){
       for (col=row->begin(); col != row->end(); ++col){
-        col = new room;
-        col.set_event(empt);
+        col->set_event(empt);
       }
     }
 
   assign_events();
   set_starting_location();
+
   if (debug==true) {
-    for (row=r->begin(); row != r->end();++row){
+    for (row=r.begin(); row != r.end();++row){
       for (col=row->begin(); col != row->end(); ++col){
-        r->at(row)->at(col).set_reveal(true);
+        col->set_reveal(true);
       }
     }
   }
@@ -68,27 +68,8 @@ game::game(int ro, bool de=false){
   can_flee = false;
   w_alive = true;
   debug = true;
-
-  r->resize(n_rooms, vector<room>(n_rooms));
-  assign_events();
-  set_starting_location();
-  if (debug==true) {
-    for (int i=0; i < n_rooms-1;++i)
-      for (int j=0; j < n_rooms-1;++j)
-        r[i][j].set_reveal(true);
-  }
 }
 
-game::~game(){
-  vector<vector<room>>::iterator row;
-  vector<room>::iterator col;
-   for (row=r->begin(); row != r->end();++row){
-     delete r[row];
-     r[row] = nullptr;
-   }
-   delete r;
-   r = nullptr;
-}
 /**************************************************************************
                         accessors and mutators
 **************************************************************************/
@@ -233,12 +214,12 @@ void game::player_move(){
   cout << "Your move: ";
   get_char(a);
   while (repeat==1){
-    if (a=='w'||a=='a'||a=='s'||a=='d'||a=='x'){
+    if (a=='w'||a=='a'||a=='s'||a=='d'||a==' '||a==32){
       if (a =='w') move_north();
       if (a =='a') move_west();
       if (a =='s') move_south();
       if (a =='d') move_east();
-      if (a == 'x') arrow_direction();
+      if (a == 32) arrow_direction();
       repeat = 0;
     } else {
       cout << "Your move: ";
@@ -300,13 +281,13 @@ void game::arrow_direction(){
   while (repeat==1){
     cout << "direction to fire: ";
     get_char(d);
-    if (d=='w') {
+    if (d=='s') {
       arrow_north();
       repeat = 0;
     } else if (d=='a') {
       arrow_west();
       repeat = 0;
-    } else if (d=='s') {
+    } else if (d=='w') {
       arrow_south();
       repeat = 0;
     } else if (d=='d') {
@@ -320,6 +301,7 @@ Function: arrow_north
 Description: shoots an arrow north
 ***************************************************************/
 void game::arrow_north(){
+  void wumpwake();
   for (int i=0; i < n_rooms; ++i){
     if (p_x+i < n_rooms-1){
       r[p_y][p_x+i].set_reveal(true);
@@ -327,8 +309,7 @@ void game::arrow_north(){
         break;
       }
     } else {
-      r[p_y][p_x+i-1]->set_arrows(r[p_y][p_x+i-1].get_arrows() + 1);
-      arrow_noise(p_y,p_x+i-1);
+      r[p_y][p_x+i-1].set_arrows(r[p_y][p_x+i-1].get_arrows() + 1);
       break;
     }
   }
@@ -338,6 +319,7 @@ Function: arrow_south
 Description: shoots an arrow south
 ***************************************************************/
 void game::arrow_south(){
+  void wumpwake();
   for (int i=0; i < n_rooms; ++i){
     if (p_x-i >= 0){
       r[p_y][p_x-i].set_reveal(true);
@@ -346,7 +328,6 @@ void game::arrow_south(){
       }
     } else {
       r[p_y][p_x-i+1].set_arrows(r[p_y][p_x-i+1].get_arrows() + 1);
-      arrow_noise(p_x-i+1,p_y);
       break;
     }
   }
@@ -356,6 +337,7 @@ Function: arrow_east
 Description: shoots an arrow east
 ***************************************************************/
 void game::arrow_east(){
+  void wumpwake();
   for (int i=0; i < n_rooms; ++i){
     if (p_y+i < n_rooms){
       r[p_y+i][p_x].set_reveal(true);
@@ -364,7 +346,6 @@ void game::arrow_east(){
       }
     } else {
       r[p_y+i-1][p_x].set_arrows(r[p_y+i-1][p_x].get_arrows() + 1);
-      arrow_noise(p_y+i-1,p_x);
       break;
     }
   }
@@ -374,6 +355,7 @@ Function: arrow_west
 Description: shoots an arrow west
 ***************************************************************/
 void game::arrow_west(){
+  void wumpwake();
   for (int i=0; i < n_rooms; ++i){
     if (p_y-i >= 0){
       r[p_y-i][p_x].set_reveal(true);
@@ -382,20 +364,9 @@ void game::arrow_west(){
       }
     } else {
       r[p_y-i+1][p_x].set_arrows(r[p_y-i+1][p_x].get_arrows() + 1);
-      arrow_noise(p_y-i+1,p_x);
       break;
     }
   }
-}
-/**************************************************************
-Function: arrow_noise
-Description: if the arrow hits the wall, does it make a noise
-***************************************************************/
-void game::arrow_noise(int x, int y){
-  if (x+1<n_rooms) if (r[x+1][y].get_e_symbol()=='w') wumpwake(x+1, y);
-  if (x-1>=0) if (r[x-1][y].get_e_symbol()=='w') wumpwake(x-1, y);
-  if (y+1<n_rooms) if (r[x+1][y].get_e_symbol()=='w') wumpwake(x, y+1);
-  if (y-1>=0) if (r[x+1][y].get_e_symbol()=='w') wumpwake(x, y-1);
 }
 /**************************************************************************
                           event related functions
@@ -419,6 +390,8 @@ void game::assign_wumpus(){
   while (num < 1){
     if (r[y][x].get_e_symbol() == ' ') {
       r[y][x].set_event(w);
+      w_x = y;
+      w_y = x;
       num++;
     } else {
       x = rand() % (n_rooms-1);
@@ -581,15 +554,19 @@ void game::print_map(){
 Function: wumpwake
 Description: handles if the wumpus wakes up and moving it
 ***************************************************************/
-void game::wumpwake(int x,int y){
-  int num = rand() % 4;
+void game::wumpwake(){
+  int num = rand() % 5;
   int new_x = rand() % (n_rooms - 1), new_y = rand() % (n_rooms - 1);
 
   if (num < 4){
+    cout << "The Wumpus wakes up and walks to another room.\n";
+    cout << "The Wumpus falls asleep again.\n";
     if (new_x != p_x && new_y != p_y ){
-      if (new_x != x || new_y != y){
+      if (new_x != w_x || new_y != w_y){
         r[new_x][new_y].set_event(w);
-        r[x][y].set_event(empt);
+        r[w_x][w_y].set_event(empt);
+        w_x = new_x;
+        w_y = new_y;
       }
     }
   }
@@ -602,6 +579,7 @@ Description: checks if your arrow goes through the wumpus room.
 ***************************************************************/
 bool game::killwump(int x, int y){
   if (r[x][y].get_e_symbol() == 'w'){
+    r[x][y].set_event(empt);
     cout << "Your arrow pierces the heart of the Wumpus, striking it dead.\n";
     w_alive = false;
     return true;
@@ -628,20 +606,14 @@ Function:
 Description:
 ***************************************************************/
 void game::print_percepts(){
-  cout << "in percepts ";
   if (p_y < n_rooms-1 && r[p_y+1][p_x].get_e_symbol() != ' ')
     cout << r[p_y+1][p_x].get_e_percept() << endl;
-  cout << "right ";
   if (p_y > 0 && r[p_y-1][p_x].get_e_symbol() != ' ')
     cout << r[p_y-1][p_x].get_e_percept() << endl;
-  cout << "left ";
   if (p_x < n_rooms-1 && r[p_y][p_x+1].get_e_symbol() != ' ')
     cout << r[p_y][p_x+1].get_e_percept() << endl;
-  cout << "down ";
-  if (p_x > 0 && r[p_y+1][p_x-1].get_e_symbol() != ' ')
+  if (p_x > 0 && r[p_y][p_x-1].get_e_symbol() != ' ')
     cout << r[p_y][p_x-1].get_e_percept() << endl;
-  cout << "up ";
-  cout << "exit percepts\n";
 }
 /**************************************************************
 Function: game_loop
@@ -650,18 +622,20 @@ Description: function that loops through user turns, and checks
 ***************************************************************/
 void game::game_loop(){
   while(can_flee==false && alive==true){
-    clear_terminal();
-    print_map();
     if (can_flee==false && alive==true){
       turn();
     }
   }
+  print_map();
+  if (can_flee==true && alive==true) cout << "You've won!\n";
 }
 /**************************************************************
 Function: turn
 Description: one turn of the game
 ***************************************************************/
 void game::turn(){
+  clear_terminal();
+  print_map();
   print_percepts();
   player_move();
   post_event(r[p_y][p_x].get_e_encounter());
@@ -678,19 +652,20 @@ Function: get_char
 Description: gets a char from the user, checks if it's a char, loops
              until it finally gets the char it so desires
 ***************************************************************/
+
 void game::get_char(char &a){
   int repeat = 1;
-
-  cin >> a;
-
+  string temp;
+  getline(cin, temp);
   while (repeat == 1) {
     if (cin.fail() == true) {
       cin.clear();
       cin.ignore(1000000000,'\n');
       cout << "\terror: Non-character input\n\tInput an character: ";
-      cin >> a;
-    } else {
-      repeat = 0;
+      getline(cin, temp);
+    } else if (temp[0]>=32 && temp[0] <= 126){
+        a = temp[0];
+        repeat = 0;
     }
   }
 }

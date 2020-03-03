@@ -20,7 +20,7 @@ using namespace std;
 class game {
   private:
     bool alive, has_gold, can_flee, w_alive, debug;
-    int p_x, p_y, n_rooms, p_arrows;
+    int p_x, p_y, n_rooms, p_arrows, w_x, w_y;
     wumpus w;
     bats b1,b2;
     pit p;
@@ -29,10 +29,10 @@ class game {
     empty empt;
 
   public:
-    vector<vector<room>> *r;
+    vector<vector<room>> r;
     game();
     game(int, bool);
-    //~game();
+
     //accessors
     int get_p_x();
     int get_p_y();
@@ -65,7 +65,6 @@ class game {
     void arrow_south();
     void arrow_east();
     void arrow_west();
-    void arrow_noise(int, int);
     //event related stuff
     void assign_events();
     void assign_wumpus();
@@ -81,7 +80,7 @@ class game {
     //other
     void turn();
     void print_map();
-    void wumpwake(int,int);
+    void wumpwake();
     bool killwump(int,int);
     void set_starting_location();
     void print_percepts();
