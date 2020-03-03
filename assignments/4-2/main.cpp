@@ -12,7 +12,7 @@ description: driver for hunt the wumpus game
 using namespace std;
 
 int main(int argc, char **argv){
-  int square, debug, repeat=1, same=0;
+  int square, debug, repeat=1, same=0,ts, td;
   game temp;
   srand(time(0));
   check_args(square, debug, argc, argv);
