@@ -31,8 +31,7 @@ class game {
   public:
     vector<vector<room>> r;
     game();
-    game(int, bool);
-
+    game(int, int);
     //accessors
     int get_p_x();
     int get_p_y();
@@ -89,4 +88,6 @@ class game {
     void get_char(char &);
 };
 
+  void save_lines(int &, int &);
+  void check_args(int &, int &, int, char **);
 #endif

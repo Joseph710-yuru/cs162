@@ -25,9 +25,9 @@ Description: default constructor for game class
 game::game(){
   p_y=0;
   p_arrows=3;
-  n_rooms=8;
+  n_rooms=4;
 
-  debug = true;
+  debug = false;
   alive = true;
   has_gold = false;
   can_flee = false;
@@ -44,6 +44,36 @@ game::game(){
 
   assign_events();
   set_starting_location();
+}
+/**************************************************************
+Function: game
+parameters: int, int
+Description: constructor that allows for variable map size
+             and debug mode
+***************************************************************/
+game::game(int ro, int de){
+  p_y=0;
+  p_arrows=3;
+  n_rooms=ro;
+
+  if (de = 1) debug = true;
+  else debug = false;
+  alive = true;
+  has_gold = true;
+  can_flee = false;
+  w_alive = true;
+
+  r.resize(n_rooms, vector<room>(n_rooms));
+  vector<vector<room>>::iterator row;
+  vector<room>::iterator col;
+  for (row=r.begin(); row != r.end();++row){
+    for (col=row->begin(); col != row->end(); ++col){
+      col->set_event(empt);
+    }
+  }
+
+  assign_events();
+  set_starting_location();
 
   if (debug==true) {
     for (row=r.begin(); row != r.end();++row){
@@ -53,150 +83,133 @@ game::game(){
     }
   }
 }
-/**************************************************************
-Function:
-Description:
-***************************************************************/
-game::game(int ro, bool de=false){
-  p_y=0;
-  p_arrows=3;
-  n_rooms=ro;
-
-  debug = de;
-  alive = true;
-  has_gold = true;
-  can_flee = false;
-  w_alive = true;
-  debug = true;
-}
 
 /**************************************************************************
                         accessors and mutators
 **************************************************************************/
-//accessors
 /**************************************************************
-Function:
-Description:
+Function: get_p_x
+Description: accessor for p_x
 ***************************************************************/
 int game::get_p_x(){
   return p_x;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_p_y
+Description: accessor for p_y
 ***************************************************************/
 int game::get_p_y(){
   return p_y;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_n_rooms
+Description: accessor for n_rooms
 ***************************************************************/
 int game::get_n_rooms(){
   return n_rooms;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_p_arrows
+Description: accessor for p_arrows
 ***************************************************************/
 int game::get_p_arrows(){
   return p_arrows;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_alive
+Description: accessor for alive
 ***************************************************************/
 bool game::get_alive(){
   return alive;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_has_gold
+Description: accessor for has_gold
 ***************************************************************/
 bool game::get_has_gold(){
   return has_gold;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_can_flee
+Description: accessor for can_flee
 ***************************************************************/
 bool game::get_can_flee(){
   return can_flee;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_w_alive
+Description: accessor for w_alive
 ***************************************************************/
 bool game::get_w_alive(){
   return w_alive;
 }
 /**************************************************************
-Function:
-Description:
+Function: get_debug
+Description: accessor for debug
 ***************************************************************/
 bool game::get_debug(){
   return debug;
 }
 //mutators
 /**************************************************************
-Function:
-Description:
+Function: set_p_x
+Description: mutator for p_x
 ***************************************************************/
 void game::set_p_x(int x){
   p_x = x;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_p_y
+Description: mutator for p_y
 ***************************************************************/
 void game::set_p_y(int y){
   p_y = y;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_n_rooms
+Description: mutator for n_rooms
 ***************************************************************/
 void game::set_n_rooms(int n){
   n_rooms = n;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_p_arrows
+Description: mutator for p_arrows
 ***************************************************************/
 void game::set_p_arrows(int a){
   p_arrows = a;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_alive
+Description: mutator for alive
 ***************************************************************/
 void game::set_alive(bool a){
   alive = a;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_has_gold
+Description: mutator for has_gold
 ***************************************************************/
 void game::set_has_gold(bool g){
   has_gold = g;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_can_flee
+Description: mutator for can_flee
 ***************************************************************/
 void game::set_can_flee(bool f){
   can_flee = f;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_w_alive
+Description: mutator for w_alive
 ***************************************************************/
 void game::set_w_alive(bool w){
   w_alive = w;
 }
 /**************************************************************
-Function:
-Description:
+Function: set_debug
+Description: mutator for debug
 ***************************************************************/
 void game::set_debug(bool d){
   debug = d;
@@ -205,8 +218,9 @@ void game::set_debug(bool d){
                               player movement
 **************************************************************************/
 /**************************************************************
-Function:
-Description:
+Function: player_move
+Description: handles user input and specific direction function calls
+             for player movement
 ***************************************************************/
 void game::player_move(){
   int repeat=1;
@@ -233,7 +247,7 @@ Description: move player one room north.
 ***************************************************************/
 void game::move_north(){
   if (p_x > 0) p_x -= 1;
-  else {
+  else if (p_x == 0){
     cout << "You cannot move farther north.\n";
   }
 }
@@ -372,8 +386,9 @@ void game::arrow_west(){
                           event related functions
 **************************************************************************/
 /**************************************************************
-Function:
-Description:
+Function: assign_events
+Description: calls all the functions to put the special events on
+             the game board
 ***************************************************************/
 void game::assign_events(){
   assign_wumpus();
@@ -488,6 +503,10 @@ void game::post_bats(){
     post_event(r[p_y][p_x].get_e_encounter());
   if (r[p_y][p_x].get_e_symbol() == 'b')
     post_event(r[p_y][p_x].get_e_encounter());
+  if (alive==true){
+    clear_terminal();
+    print_map();
+  }
 }
 /**************************************************************
 Function: post_gold
@@ -602,8 +621,8 @@ void game::set_starting_location(){
   }
 }
 /**************************************************************
-Function:
-Description:
+Function: print_percepts
+Description: handles getting adjacent room percepts and printing them
 ***************************************************************/
 void game::print_percepts(){
   if (p_y < n_rooms-1 && r[p_y+1][p_x].get_e_symbol() != ' ')
@@ -622,11 +641,14 @@ Description: function that loops through user turns, and checks
 ***************************************************************/
 void game::game_loop(){
   while(can_flee==false && alive==true){
+    clear_terminal();
+    print_map();
+    post_event(r[p_y][p_x].get_e_encounter());
     if (can_flee==false && alive==true){
-      turn();
+      print_percepts();
+      player_move();
     }
   }
-  print_map();
   if (can_flee==true && alive==true) cout << "You've won!\n";
 }
 /**************************************************************
@@ -636,9 +658,9 @@ Description: one turn of the game
 void game::turn(){
   clear_terminal();
   print_map();
+  post_event(r[p_y][p_x].get_e_encounter());
   print_percepts();
   player_move();
-  post_event(r[p_y][p_x].get_e_encounter());
 }
 /**************************************************************
 Function: clear_terminal
@@ -652,7 +674,6 @@ Function: get_char
 Description: gets a char from the user, checks if it's a char, loops
              until it finally gets the char it so desires
 ***************************************************************/
-
 void game::get_char(char &a){
   int repeat = 1;
   string temp;
@@ -668,4 +689,31 @@ void game::get_char(char &a){
         repeat = 0;
     }
   }
+}
+/**************************************************************
+Function:
+Description: i stuff this in here because i didnt want it in my main
+             it just does some arg checking and assigning to variables
+**************************************************************/
+void check_args(int &square, int &debug, int ac, char **av){
+  if (ac == 0) {
+    debug = 0;
+    square = 4;
+  } else if (ac==2) {
+    square = stoi(av[1]);
+    debug=0;
+  } else if (ac==3) {
+    square = stoi(av[1]);
+    debug = stoi(av[2]);
+  }
+}
+/**************************************************************
+Function: save_lines
+Description: i wrote this explicitly to save lines in main
+**************************************************************/
+void save_lines(int &square, int &debug){
+  cout << "Enter # of rows: ";
+  cin >> square;
+  cout << "Debug (1-yes): ";
+  cin >> debug;
 }
