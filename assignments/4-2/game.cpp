@@ -48,18 +48,17 @@ game::game(){
 /**************************************************************
 Function: game
 parameters: int, int
-Description: constructor that allows for variable map size
-             and debug mode
+Description: parameterized constructor that allows for variable
+             map size and debug mode
 ***************************************************************/
-game::game(int ro, int de){
+game::game(int ro, bool de){
   p_y=0;
   p_arrows=3;
   n_rooms=ro;
 
-  if (de = 1) debug = true;
-  else debug = false;
+  debug = de;
   alive = true;
-  has_gold = true;
+  has_gold = false;
   can_flee = false;
   w_alive = true;
 
@@ -83,7 +82,6 @@ game::game(int ro, int de){
     }
   }
 }
-
 /**************************************************************************
                         accessors and mutators
 **************************************************************************/
@@ -100,6 +98,76 @@ Description: accessor for p_y
 ***************************************************************/
 int game::get_p_y(){
   return p_y;
+}
+/**************************************************************
+Function: get_w_x
+Description: accessor for p_x
+***************************************************************/
+int game::get_w_x(){
+  return w_x;
+}
+/**************************************************************
+Function: get_w_y
+Description: accessor for p_x
+***************************************************************/
+int game::get_w_y(){
+  return w_y;
+}
+/**************************************************************
+Function: get_b1_x
+Description: accessor for b1_x
+***************************************************************/
+int game::get_b1_x(){
+  return b1_x;
+}
+/**************************************************************
+Function: get_b1_y
+Description: accessor for b1_x
+***************************************************************/
+int game::get_b1_y(){
+  return b1_y;
+}
+/**************************************************************
+Function: get_b1_x
+Description: accessor for b1_x
+***************************************************************/
+int game::get_b2_x(){
+  return b2_x;
+}
+/**************************************************************
+Function: get_b1_y
+Description: accessor for b1_x
+***************************************************************/
+int game::get_b2_y(){
+  return b2_y;
+}
+/**************************************************************
+Function: get_pi_x
+Description: accessor for pi_x
+***************************************************************/
+int game::get_pi_x(){
+  return pi_x;
+}
+/**************************************************************
+Function: get_pi_y
+Description: accessor for pi_y
+***************************************************************/
+int game::get_pi_y(){
+  return pi_y;
+}
+/**************************************************************
+Function: get_g_x
+Description: accessor for g_x
+***************************************************************/
+int game::get_g_x(){
+  return g_x;
+}
+/**************************************************************
+Function: get_pi_y
+Description: accessor for pi_y
+***************************************************************/
+int game::get_g_y(){
+  return g_y;
 }
 /**************************************************************
 Function: get_n_rooms
@@ -423,6 +491,8 @@ void game::assign_pit(){
   while (num < 1){
     if (r[y][x].get_e_symbol() == ' ') {
       r[y][x].set_event(p);
+      pi_x = y;
+      pi_y = x;
       num++;
     } else {
       x = rand() % (n_rooms-1);
@@ -439,6 +509,8 @@ void game::assign_bats(){
   while (num < 1){
     if (r[y][x].get_e_symbol() == ' ') {
       r[y][x].set_event(b1);
+      b1_x = y;
+      b1_y = x;
       num++;
     } else {
       x = rand() % (n_rooms-1);
@@ -449,6 +521,8 @@ void game::assign_bats(){
   while (num < 1){
     if (r[y][x].get_e_symbol() == ' ') {
       r[y][x].set_event(b2);
+      b2_x = y;
+      b2_y = x;
       num++;
     } else {
       x = rand() % (n_rooms-1);
@@ -465,6 +539,8 @@ void game::assign_gold(){
   while (num < 1){
     if (r[y][x].get_e_symbol() == ' ') {
       r[y][x].set_event(g);
+      g_x = y;
+      g_y = x;
       num++;
     } else {
       x = rand() % (n_rooms-1);
@@ -532,6 +608,17 @@ void game::post_escape(){
   if (alive==true && has_gold == true && w_alive==false){
     can_flee=true;
   }
+}
+/**************************************************************
+Function: post_escape
+Description: used when duplicating from another game
+***************************************************************/
+void game::copy_events(){
+  r[g_x][g_y].set_event(g);
+  r[pi_x][pi_y].set_event(p);
+  r[b1_x][b1_y].set_event(b1);
+  r[b2_x][b2_y].set_event(b2);
+  r[p_y][p_x].set_event(e);
 }
 /**************************************************************************
                           Other functions
@@ -696,15 +783,15 @@ Description: i stuff this in here because i didnt want it in my main
              it just does some arg checking and assigning to variables
 **************************************************************/
 void check_args(int &square, int &debug, int ac, char **av){
-  if (ac == 0) {
-    debug = 0;
-    square = 4;
-  } else if (ac==2) {
+   if (ac==2) {
     square = stoi(av[1]);
-    debug=0;
+    debug=false;
   } else if (ac==3) {
     square = stoi(av[1]);
-    debug = stoi(av[2]);
+    if (stoi(av[2]) == 1) debug = true;;
+  } else {
+      debug = false;
+      square = 4;
   }
 }
 /**************************************************************

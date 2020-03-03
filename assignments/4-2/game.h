@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "game.h"
 #include "room.h"
 #include "event.h"
 #include "bats.h"
@@ -20,7 +19,8 @@ using namespace std;
 class game {
   private:
     bool alive, has_gold, can_flee, w_alive, debug;
-    int p_x, p_y, n_rooms, p_arrows, w_x, w_y;
+    int p_x, p_y, n_rooms, p_arrows, w_x, w_y,
+        b1_x, b1_y, b2_x, b2_y, pi_x, pi_y, g_x, g_y;
     wumpus w;
     bats b1,b2;
     pit p;
@@ -31,10 +31,20 @@ class game {
   public:
     vector<vector<room>> r;
     game();
-    game(int, int);
+    game(int, bool);
     //accessors
     int get_p_x();
     int get_p_y();
+    int get_w_x();
+    int get_w_y();
+    int get_b1_x();
+    int get_b1_y();
+    int get_b2_x();
+    int get_b2_y();
+    int get_pi_x();
+    int get_pi_y();
+    int get_g_x();
+    int get_g_y();
     int get_n_rooms();
     int get_p_arrows();
     bool get_alive();
@@ -76,6 +86,8 @@ class game {
     void post_gold();
     void post_wumpit();
     void post_escape();
+
+    void copy_events();
     //other
     void turn();
     void print_map();

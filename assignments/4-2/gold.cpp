@@ -1,3 +1,7 @@
+/*******************************************************************
+file: gold.cpp
+description: implementation for gold class
+*******************************************************************/
 #include "gold.h"
 
 #include <iostream>
