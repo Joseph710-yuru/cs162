@@ -5,6 +5,7 @@ class node {
   public:
     int val;
     node *next;
+    node();
 };
 
 #endif

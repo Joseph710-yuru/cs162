@@ -10,8 +10,9 @@ using namespace std;
 class linked_list {
   private:
     unsigned int length; // length of list
-    Node *head; // points 2 head
+    node *head; // points 2 head
   public:
+    linked_list();
     int get_length();
     void print();
     void clear();
@@ -20,7 +21,7 @@ class linked_list {
     unsigned int insert(int, unsigned int);
     void sort_ascending();
     void sort_descending();
-    bool prime();
+    bool prime(int);
     void print_prime();
     void swap_nodes();
 };
