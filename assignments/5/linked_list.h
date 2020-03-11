@@ -13,6 +13,7 @@ class linked_list {
     node *head; // points 2 head
   public:
     linked_list();
+    ~linked_list();
     int get_length();
     void print();
     void clear();
