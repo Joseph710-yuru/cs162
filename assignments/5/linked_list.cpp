@@ -73,7 +73,8 @@ void linked_list::clear(){
       length--;
     }
   }
-
+  
+  length = 0;
   head->val = 0;
   head->next = nullptr;
 }
@@ -82,15 +83,18 @@ function: push_front
 description: adds new element to beginning of linked list
 *******************************************************************/
 unsigned int linked_list::push_front(int v){
-    node *temp;
+  node *temp;
+  if (length = 0) head->val = v;
+  else {
     temp = new node;
     temp->val = head->val;
     temp->next = head->next;
 
     head->next = temp;
     head->val = v;
+  }
 
-    length++;
+  length++;
 }
 /*******************************************************************
 function: push_back
@@ -98,7 +102,7 @@ description: adds new element to end of linked list
 *******************************************************************/
 unsigned int linked_list::push_back(int v){
   node *temp, *t2=head;
-  if (head->next == nullptr) {
+  if (length == 0) {
     head->val = v;
   } else {
     for (int i=0; i<length;++i){
@@ -141,25 +145,99 @@ unsigned int linked_list::insert(int v, unsigned int index){
 function: sort_ascending
 description: sorts list in ascending order using a recursive merge sort
 *******************************************************************/
-void sort_ascending(){
+void linked_list::sort_ascending(){
+  merge_sort_ascend(&head);
+}
+/*******************************************************************
+function: merge_ascend
+parameter: node **
+description: merge sort algorithm to sort from least to greatest
+*******************************************************************/
+void linked_list::merge_sort_ascend(node **ref){
+  node *top = *ref, *a, *b;
+  if (top == nullptr || top->next==nullptr) return;
+  split(top, &a, &b);
+  merge_sort_ascend(&a);
+  merge_sort_ascend(&b);
+  *ref = merge_ascend(a, b);
+}
+/*******************************************************************
+function: split
+description: splits a linked list into two.
+*******************************************************************/
+void linked_list::split(node *source, node **a, node **b){
+  if (source==nullptr || source->next == nullptr){
+    *a = source;
+    *b = nullptr;
+  } else {
+    node *fast, *slow;
+    fast = source->next;
+    slow = source;
 
+    while (fast != nullptr && fast->next != nullptr){
+      fast = fast->next->next;
+      slow = slow->next;
+    }
+    *a = source;
+    *b = slow->next;
+    slow->next = nullptr;
+  }
+}
+/*******************************************************************
+function: merge_ascend
+description: merges two lists together in ascending order
+*******************************************************************/
+node* linked_list::merge_ascend(node *a, node *b){
+  if (a==nullptr) return b;
+  if (b==nullptr) return a;
+
+  node *top = nullptr;
+  if (a->val <= b->val) {
+    top = a;
+    top->next = merge_ascend(top->next, b);
+  } else {
+    top = b;
+    top->next = merge_ascend(top->next, a);
+  }
+  return top;
 }
 /*******************************************************************
 function: sort_descending
 description: sorts list in descending order using a recursive selection sort
 *******************************************************************/
-void sort_descending(){
-  if (head->next != nullptr) {
-    node *min, *nav;
-    while (nav->next != nullptr){
-      if (min->data > nav->next->val)
-        min = nav->next;
-    }
-  }
+void linked_list::sort_descending(){
+  merge_sort_descend(&head);
 }
+/*******************************************************************
+function: merge_descend
+parameter: node **
+description: merge sort algorithm to sort from greatest to least
+*******************************************************************/
+void linked_list::merge_sort_descend(node **ref){
+  node *top = *ref, *a, *b;
+  if (top == nullptr || top->next==nullptr) return;
+  split(top, &a, &b);
+  merge_sort_descend(&a);
+  merge_sort_descend(&b);
+  *ref = merge_descend(a, b);
+}
+/*******************************************************************
+function: merge_descend
+description: merges two lists together in descending order
+*******************************************************************/
+node* linked_list::merge_descend(node *a, node *b){
+  if (a==nullptr) return b;
+  if (b==nullptr) return a;
 
-void swap_nodes(){
-  
+  node *top = nullptr;
+  if (a->val >= b->val) {
+    top = a;
+    top->next = merge_descend(top->next, b);
+  } else {
+    top = b;
+    top->next = merge_descend(top->next, a);
+  }
+  return top;
 }
 /*******************************************************************
 function: prime
@@ -190,4 +268,19 @@ void linked_list::print_prime(){
   }
   cout << endl;
   temp = nullptr;
+}
+/*******************************************************************
+function: print_prime()
+description: returns the amount of primes in the list
+*******************************************************************/
+int linked_list::prime_amount(){
+  node *temp = head;
+  int i=0, num=0;
+  while (i != length) {
+    if (prime(temp->val)==true) num++;
+    temp = temp->next;
+    i++;
+  }
+  temp = nullptr;
+  return num;
 }

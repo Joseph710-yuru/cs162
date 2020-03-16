@@ -12,18 +12,48 @@ using namespace std;
 
 int main(){
   linked_list l;
+  char c = 'y', s, repeat= 'y';
+  int v;
 
-  l.push_back(8);
-  l.push_front(7);
-  l.push_front(11);
-  l.push_front(13);
-  l.push_back(21);
-  l.insert(121, 3);
 
-  cout << "primes: ";
-  l.print_prime();
-  cout << "whole list: ";
-  l.print();
+  while (repeat == 'y'){
+    cout << "Please enter a number: "; // get initial value for list
+    cin >> v;
+    l.push_back(v);
+
+    while (c == 'y'){ // why not get some more values for the list
+      cout << "Add another number to you list (y/n): ";
+      cin >> c;
+      if (c == 'y') {
+        cout << "Enter a number: ";
+        cin >> v;
+        l.push_back(v);
+      }
+    }
+    l.print();
+
+    cout << "Sort list in ascending or descending order (a/d): ";
+    cin >> s;
+    if (s == 'a') {
+      cout << "Sort ascending...\n";
+      l.sort_ascending();
+    } else if (s == 'd') {
+      cout << "Sort descending...\n";
+      l.sort_descending();
+    }
+
+    cout << "Your linked list is: ";
+    l.print();
+    cout << "You have " << l.prime_amount() << " prime(s) in your list.\nThey are: ";
+    l.print_prime();
+
+    cout << "Do you want to do this again (y/n): ";
+    cin >> repeat;
+    if (repeat == 'y') {
+      c = 'y';
+      l.clear();
+    }
+  }
 
   return 0;
 }
